@@ -17,7 +17,7 @@ Test your knowledge with AI powered Practice & Feedback.
 Practice any type of questions and get instant feedback on Knowledge and Vocal abilities.
 </p>
 
-<Button asChild className="btn-primary max-sm:w-full">
+<Button asChild className="btn-primary max-sm:w-full p-6 text-xl mt-2">
             <Link href="/interview">Create A Quiz</Link>
 </Button>
 

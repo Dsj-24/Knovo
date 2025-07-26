@@ -294,7 +294,7 @@
 }
 
 @utility dark-gradient {
-  @apply bg-gradient-to-b from-[#48044d] to-[#310125];
+  @apply bg-gradient-to-b from-[#530558] to-[#310125];
 }
 
 @utility border-gradient {
