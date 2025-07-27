@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 const AuthFormSchema = (type: FormType) => {
   return z.object({
     name: type === 'sign-up' ? z.string().min(7) : z.string().optional(),
-    email: z.string().email(),
+    email: z.email(),
     password: z.string().min(6)
   })
 }
@@ -70,31 +70,23 @@ const AuthForm = ({ type }: { type: FormType }) => {
       } else {
          const { email, password } = values;
 
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-        const idToken = await userCredential.user.getIdToken();
-        if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
-          return;
-        }
+  if (!userCredential?.user) {
+    throw new Error("Sign-in failed: No user returned");
+  }
 
-        await signIn({
-          email,
-          idToken,
-        });
+  const idToken = await userCredential.user.getIdToken();
+  if (!idToken) {
+    throw new Error("Sign-in failed: No ID token");
+  }
 
-        toast.success("Sucessfully Signed In");
-        router.push("/");
-        console.log("Sign In", values);
+  await signIn({ email, idToken });
+  toast.success("Successfully Signed In");
+  router.push("/");
       }
-    } catch (e) {
-      console.log(`There was an error: ${e}`);
-      toast.error(`There was an error: ${e}`);
-
+    } catch (e:any) {
+      toast.error(`There was an error : ${e.message}`)
     }
     console.log(values)
   }
@@ -107,7 +99,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           <Image src="/logo.svg" alt="logo" height={32} width={38} />
           <h2 className="text-primary-100">KNOVO</h2>
         </div>
-        <h3 className="">Practice Personalized quizzes with AI</h3>
+        <h3 className="text-center">Practice Personalized quizzes with AI</h3>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
             {!isSignIn && (<FormField
