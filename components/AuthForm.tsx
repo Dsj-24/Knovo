@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 const AuthFormSchema = (type: FormType) => {
   return z.object({
     name: type === 'sign-up' ? z.string().min(7) : z.string().optional(),
-    email: z.email(),
+    email: z.string().email(),
     password: z.string().min(6)
   })
 }
