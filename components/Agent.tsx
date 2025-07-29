@@ -1,8 +1,11 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
+import { vapi } from '@/lib/vapi.sdk';
+import { QuizMaster } from '@/constants';
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -11,15 +14,119 @@ enum CallStatus {
     FINISHED = "FINISHED",
 }
 
-const Agent = ({ userName }: AgentProps) => {
-    const isSpeaking = true;
-    const callStatus = CallStatus.INACTIVE; // This would be managed by state in a real application
-    const messages = [
-  'Whats your name?',
-  'My name is John Doe, nice to meet you!'
-];
+interface SavedMessage {
+    role: "user" | "system" | "assistant";
+    content: string;
+}
 
-const lastMessage = messages[messages.length - 1];
+const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentProps) => {
+    const router = useRouter();
+    const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
+    const [messages, setMessages] = useState<SavedMessage[]>([]);
+    const [isSpeaking, setIsSpeaking] = useState(false);
+    const [lastMessage, setLastMessage] = useState<string>("");
+
+    useEffect(() => {
+        const onCallStart = () => {
+            setCallStatus(CallStatus.ACTIVE);
+        };
+
+        const onCallEnd = () => {
+            setCallStatus(CallStatus.FINISHED);
+        };
+
+        const onMessage = (message: Message) => {
+            if (message.type === "transcript" && message.transcriptType === "final") {
+                const newMessage = { role: message.role, content: message.transcript };
+                setMessages((prev) => [...prev, newMessage]);
+            }
+        };
+        const onSpeechStart = () => {
+            console.log("speech start");
+            setIsSpeaking(true);
+        };
+
+        const onSpeechEnd = () => {
+            console.log("speech end");
+            setIsSpeaking(false);
+        };
+
+        const onError = (error: Error) => {
+            console.log("Error:", error);
+        };
+
+        vapi.on("call-start", onCallStart);
+        vapi.on("call-end", onCallEnd);
+        vapi.on("message", onMessage);
+        vapi.on("speech-start", onSpeechStart);
+        vapi.on("speech-end", onSpeechEnd);
+        vapi.on("error", onError);
+
+        return () => {
+            vapi.off("call-start", onCallStart);
+            vapi.off("call-end", onCallEnd);
+            vapi.off("message", onMessage);
+            vapi.off("speech-start", onSpeechStart);
+            vapi.off("speech-end", onSpeechEnd);
+            vapi.off("error", onError);
+        };
+
+    }, [])
+
+
+    useEffect(() => {
+
+        //   if (messages.length > 0) {
+        //     setLastMessage(messages[messages.length - 1].content);
+        //   }
+
+        if (callStatus === CallStatus.FINISHED) {
+            router.push("/");
+        }
+    }, [messages, callStatus, type, userId]);
+
+    const handleCall = async () => {
+        setCallStatus(CallStatus.CONNECTING);
+
+        if (type === "generate") {
+            await vapi.start(
+                undefined,
+                undefined,
+                undefined,
+                process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!,
+                {
+                    variableValues: {
+                        username: userName,
+                        userid: userId,
+                    },
+                }
+            );
+        } else {
+      let formattedQuestions = "";
+      if (questions && quizType) {
+        formattedQuestions = questions
+          .map((question) => `- ${question}`)
+          .join("\n");
+      }
+
+      await vapi.start(QuizMaster, {
+        variableValues: {
+          questions: formattedQuestions,
+          type: quizType
+        },
+      });
+    }
+    }
+
+
+    const handleDisconnect = () => {
+        setCallStatus(CallStatus.FINISHED);
+        vapi.stop();
+    };
+
+    const latestMessage = messages[messages.length - 1]?.content;
+
+
 
     return (
         <>
@@ -42,7 +149,7 @@ const lastMessage = messages[messages.length - 1];
                             height={539}
                             className="rounded-full object-cover size-[120px]"
                         />
-                        <h3>{userName}USERNAME</h3>
+                        <h3>{userName}</h3>
                     </div>
 
                 </div>
@@ -52,13 +159,13 @@ const lastMessage = messages[messages.length - 1];
                 <div className="transcript-border mb-12 p-1">
                     <div className="transcript">
                         <p
-                            key={lastMessage}
+                            key={latestMessage}
                             className={cn(
                                 "transition-opacity duration-500 opacity-0",
-                                "animate-fadeIn opacity-100 text-xl"
+                                "animate-fadeIn opacity-100 text-2xl"
                             )}
                         >
-                            {lastMessage}
+                            {latestMessage}
                         </p>
                     </div>
                 </div>
@@ -66,7 +173,7 @@ const lastMessage = messages[messages.length - 1];
 
             <div className='w-full flex justify-center'>
                 {callStatus !== "ACTIVE" ? (
-                    <button className="relative btn-call p-4 w-44">
+                    <button className="relative btn-call p-4 w-44" onClick={handleCall}>
                         <span
                             className={cn(
                                 "absolute animate-ping rounded-full opacity-75",
@@ -74,14 +181,14 @@ const lastMessage = messages[messages.length - 1];
                             )}
                         />
 
-                        <span className="relative">
+                        <span className="relative text-2xl">
                             {callStatus === "INACTIVE" || callStatus === "FINISHED"
                                 ? "Call"
                                 : ". . ."}
                         </span>
                     </button>
                 ) : (
-                    <button className="btn-disconnect p-4 w-44">
+                    <button className="relative btn-disconnect p-4 w-44 text-2xl" onClick={handleDisconnect}>
                         End
                     </button>
                 )}

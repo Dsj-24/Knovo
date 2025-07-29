@@ -4,8 +4,22 @@ import Link from 'next/link'
 import { Button } from "@/components/ui/button";
 import { dummyQuizzes } from '../../constants/index';
 import QuizCard from '@/components/QuizCard';
+import { get } from 'http';
+import { getCurrentUser } from '@/lib/actions/auth.action';
+import { getLatestQuizzes, getQuizzesByUserId } from '@/lib/actions/general.action';
 
-const Home = () => {
+const Home = async () => {
+
+const user= await getCurrentUser();
+const [userQuizzes,  allQuizzes] = await Promise.all([
+  await getQuizzesByUserId(user?.id!),
+  await getLatestQuizzes({ userId: user?.id! })
+]);
+
+  const hasPastQuizzes = userQuizzes?.length! > 0;
+  //@ts-ignore
+  const hasUpcomingQuizzes = allQuizzes?.length! > 0;
+
   return (
     <>
  <section  className="card-cta">
@@ -18,7 +32,7 @@ Practice any type of questions and get instant feedback on Knowledge and Vocal a
 </p>
 
 <Button asChild className="btn-primary max-sm:w-full p-6 text-xl mt-2">
-            <Link href="/interview">Create A Quiz</Link>
+            <Link href="/quiz">Create A Quiz</Link>
 </Button>
 
 </div>
@@ -32,10 +46,15 @@ Practice any type of questions and get instant feedback on Knowledge and Vocal a
 
 
    <div className="interviews-section">
- {dummyQuizzes.map((quiz) => (
-      <QuizCard {...quiz} key={quiz.id}/>
-    ))}
-    {/* <p>You haven't taken any interviews yet</p> */}
+{
+  hasPastQuizzes ? (
+    userQuizzes?.map((quiz) => (
+      <QuizCard {...quiz} key={quiz.id} />
+    ))
+  ) : (
+    <p>You haven't taken any quizzes yet</p>
+  )
+}
 
    </div>
    </section>
@@ -48,10 +67,13 @@ Practice any type of questions and get instant feedback on Knowledge and Vocal a
 </h2>
 
 <div className='interviews-section'>
-    {/* <p>There are no new interviews available</p>  */}
-    {dummyQuizzes.map((quiz) => (
-      <QuizCard {...quiz} key={quiz.id}/>
-    ))}
+  {hasUpcomingQuizzes ? (
+  allQuizzes?.map((quiz) => (
+    <QuizCard {...quiz} key={quiz.id}/>
+  ))
+) : (
+  <p>There are no new quizzes available</p>
+)}
 </div>
 </section>
    </>

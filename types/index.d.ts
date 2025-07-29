@@ -58,8 +58,23 @@ interface AgentProps{
   quizId?: string;
   feedbackId?: string;
   type: "generate" | "quiz";
+  quizType?: string;
   questions?: string[];
 }
 
+interface GetFeedbackByQuizIdParams {
+  quizId: string;
+  userId: string;
+}
+
+interface GetLatestQuizzesParams {
+  userId: string;
+  limit?: number;
+}
+
+interface RouteParams {
+  params: Promise<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
+}
 
 

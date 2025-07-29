@@ -48,8 +48,8 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
             <Link
               href={
                 feedback
-                  ? `/interview/${id}/feedback`
-                  : `/interview/${id}`
+                  ? `/quiz/${id}/feedback`
+                  : `/quiz/${id}`
               }
             >
               {feedback ? "Check Feedback" : "Take Quiz"}
