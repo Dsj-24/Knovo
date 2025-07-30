@@ -8,7 +8,6 @@ import { vapi } from '@/lib/vapi.sdk';
 import { QuizMaster } from '@/constants';
 import { createFeedback } from '@/lib/actions/general.action';
 
-
 enum CallStatus {
     INACTIVE = "INACTIVE",
     CONNECTING = "CONNECTING",
@@ -75,8 +74,7 @@ const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId
 
     }, [])
 
-
-    useEffect(() => {
+useEffect(() => {
         if (messages.length > 0) {
             setLastMessage(messages[messages.length - 1].content);
         }
@@ -141,7 +139,6 @@ const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId
             });
         }
     }
-
 
     const handleDisconnect = () => {
         setCallStatus(CallStatus.FINISHED);
@@ -214,7 +211,6 @@ const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId
                     </button>
                 )}
             </div> </>
-
     )
 }
 

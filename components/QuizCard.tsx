@@ -32,7 +32,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
                             />
                             <p>{formattedDate}</p>
                         </div>
-                           <div className="flex flex-row gap-2 items-center">
+                          <div className="flex flex-row gap-2 items-center">
               <Image src="/star.svg" width={22} height={22} alt="star" />
               <p>{feedback?.totalScore || "---"}/100</p>
             </div>
