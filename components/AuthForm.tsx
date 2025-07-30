@@ -32,8 +32,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const formSchema = AuthFormSchema(type);
 
-  
-
   // Definition of the form //
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -107,7 +105,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
               name="name"
               label="Name"
               placeholder="Your Name" />)}
-
 
             <FormField
               control={form.control}
