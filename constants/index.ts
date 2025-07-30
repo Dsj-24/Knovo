@@ -1,4 +1,5 @@
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import z from "zod";
 
 export const dummyQuizzes: Quiz[] = [
   {
@@ -87,6 +88,27 @@ Keep each message short and natural. You’re in a real-time voice conversation,
     ],
   },
 };
+
+export const feedbackSchema = z.object({
+  totalScore: z.number(),
+  categoryScores: z.array(
+    z.object({
+      name: z.enum([
+        "Speed",
+        "Accuracy",
+        "Fluency",
+        "Articulation",
+        "Correctness"
+      ]),
+      score: z.number(),
+      comment: z.string(),
+    })
+  ),
+  strengths: z.array(z.string()),
+  areasForImprovement: z.array(z.string()),
+  finalAssessment: z.string(),
+});
+
 
 
 

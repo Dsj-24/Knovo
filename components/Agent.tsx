@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { vapi } from '@/lib/vapi.sdk';
 import { QuizMaster } from '@/constants';
+import { createFeedback } from '@/lib/actions/general.action';
+
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -19,7 +21,7 @@ interface SavedMessage {
     content: string;
 }
 
-const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentProps) => {
+const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId }: AgentProps) => {
     const router = useRouter();
     const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
     const [messages, setMessages] = useState<SavedMessage[]>([]);
@@ -75,15 +77,37 @@ const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentPro
 
 
     useEffect(() => {
+        if (messages.length > 0) {
+            setLastMessage(messages[messages.length - 1].content);
+        }
 
-        //   if (messages.length > 0) {
-        //     setLastMessage(messages[messages.length - 1].content);
-        //   }
+        const handleGenerateFeedback = async (messages: SavedMessage[]) => {
+            console.log("handleGenerateFeedback");
+
+            const { success, feedbackId: id } = await createFeedback({
+                quizId: quizId!,
+                userId: userId!,
+                quizType: quizType!,
+                transcript: messages,
+                feedbackId,
+            });
+
+            if (success && id) {
+                router.push(`/quiz/${quizId}/feedback`);
+            } else {
+                console.log("Error saving feedback");
+                router.push("/");
+            }
+        };
 
         if (callStatus === CallStatus.FINISHED) {
-            router.push("/");
+            if (type === "generate") {
+                router.push("/");
+            } else {
+                handleGenerateFeedback(messages);
+            }
         }
-    }, [messages, callStatus, type, userId]);
+    }, [messages, callStatus, type, userId, quizId, feedbackId, router]);
 
     const handleCall = async () => {
         setCallStatus(CallStatus.CONNECTING);
@@ -102,20 +126,20 @@ const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentPro
                 }
             );
         } else {
-      let formattedQuestions = "";
-      if (questions && quizType) {
-        formattedQuestions = questions
-          .map((question) => `- ${question}`)
-          .join("\n");
-      }
+            let formattedQuestions = "";
+            if (questions && quizType) {
+                formattedQuestions = questions
+                    .map((question) => `- ${question}`)
+                    .join("\n");
+            }
 
-      await vapi.start(QuizMaster, {
-        variableValues: {
-          questions: formattedQuestions,
-          type: quizType
-        },
-      });
-    }
+            await vapi.start(QuizMaster, {
+                variableValues: {
+                    questions: formattedQuestions,
+                    type: quizType
+                },
+            });
+        }
     }
 
 
@@ -123,9 +147,6 @@ const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentPro
         setCallStatus(CallStatus.FINISHED);
         vapi.stop();
     };
-
-    const latestMessage = messages[messages.length - 1]?.content;
-
 
 
     return (
@@ -159,13 +180,13 @@ const Agent = ({ userName, userId, type, questions, quizId , quizType}: AgentPro
                 <div className="transcript-border mb-12 p-1">
                     <div className="transcript">
                         <p
-                            key={latestMessage}
+                            key={lastMessage}
                             className={cn(
                                 "transition-opacity duration-500 opacity-0",
                                 "animate-fadeIn opacity-100 text-2xl"
                             )}
                         >
-                            {latestMessage}
+                            {lastMessage}
                         </p>
                     </div>
                 </div>

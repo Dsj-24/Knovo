@@ -58,7 +58,7 @@ interface AgentProps{
   quizId?: string;
   feedbackId?: string;
   type: "generate" | "quiz";
-  quizType?: string;
+  quizType?: "true/false" | "multiple choice" | "verbal answer" | string ;
   questions?: string[];
 }
 
@@ -77,4 +77,37 @@ interface RouteParams {
   searchParams: Promise<Record<string, string>>;
 }
 
+interface Feedback {
+  id: string;
+  quizId: string;
+  totalScore: number;
+  categoryScores: Array<{
+    name: string;
+    score: number;
+    comment: string;
+  }>;
+  strengths: string[];
+  areasForImprovement: string[];
+  finalAssessment: string;
+  createdAt: string;
+}
+
+
+interface CreateFeedbackParams {
+  quizId: string;
+  userId: string;
+  transcript: { role: string; content: string }[];
+  feedbackId?: string;
+  quizType?: "true/false" | "multiple choice" | "verbal answer" | string;
+}
+
+interface GetFeedbackByQuizIdParams {
+  quizId: string;
+  userId: string;
+}
+
+interface GetLatestQuizzesParams {
+  userId: string;
+  limit?: number;
+}
 

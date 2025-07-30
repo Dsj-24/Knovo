@@ -1,5 +1,5 @@
 import { getCurrentUser } from '@/lib/actions/auth.action';
-import { getQuizById } from '@/lib/actions/general.action';
+import { getFeedbackByQuizId, getQuizById } from '@/lib/actions/general.action';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import Image from 'next/image';
@@ -8,7 +8,11 @@ const QuizPage = async ({ params }: RouteParams) => {
     const { id } = await params;
     const quiz = await getQuizById(id);
     const user = await getCurrentUser();
-    if (!quiz) redirect('/')
+    if (!quiz) redirect('/');
+      const feedback = await getFeedbackByQuizId({
+    quizId: id,
+    userId: user?.id!,
+  });
 
     return (
         <>
@@ -39,7 +43,7 @@ const QuizPage = async ({ params }: RouteParams) => {
                 type="quiz"
                 quizType={quiz.type}
                 questions={quiz.questions}
-            // feedbackId={feedback?.id}
+                feedbackId={feedback?.id}
             /></>
     )
 }
