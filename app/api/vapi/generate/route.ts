@@ -34,27 +34,41 @@ export async function POST(request: Request) {
     try {
         const { text: questions } = await generateText({
             model: google("gemini-2.0-flash-001"),
-            prompt: `Prepare questions for a quiz with the following parameters:
-            The topic of the quiz is : ${topic}
-            The Difficulty Level is  : ${difficulty}
-            The Format of the Quiz is : ${type} (can be "true/false", "multiple choice", or "verbal answer")
-            The amount of questions required is : ${amount}
+            prompt: `You are a quiz generation assistant.
 
-            Please follow these rules:
-            - Please return only the questions , without any additional text.
-            The questions are going to be read by a voice assistant so do not use "/" or "*" or any other special characters which might break the voice assistant.
-            - If it's a multiple-choice question, embed the options directly in the question like this:
-            "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome"
-            - If it's a true/false question, format it like this:
-            "Is Python a compiled language? True or False"
-            - If it's a verbal answer question, format it like this:
-            "Explain the concept of gravity in simple terms."
-            - Do NOT return the correct answers.
-            - Do NOT include any explanations or extra content.
-            - Format your output strictly as a JSON array:
-            ["Question 1", "Question 2", "Question 3"]
-                        
-            Thank you! <3`,
+Your task is to generate ${amount} quiz questions for a user with the following settings:
+- Topic: ${topic}
+- Difficulty: ${difficulty}
+- Format: ${type} (must be one of: "true/false", "multiple choice", or "verbal answer")
+
+IMPORTANT RULES:
+- ONLY generate questions in the specified format: "${type}".
+- Do NOT mix formats. All questions must follow "${type}" strictly.
+- Do NOT include answers or explanations.
+- Do NOT include extra text before or after the list.
+- Do NOT use special characters like "/", "*", or Markdown formatting.
+
+Format Requirements:
+- For "multiple choice", each question must embed options like:
+  "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome"
+- For "true/false", format like:
+  "The sky is green. True or False"
+- For "verbal answer", format like:
+  "Explain the importance of biodiversity in ecosystems."
+
+Final Output Format:
+- Output must be a pure JSON array of strings.
+Example:
+[
+  "Question 1",
+  "Question 2",
+  ...
+]
+
+Do not wrap the array in markdown (no \`\`\`json or \`\`\`).
+Return ONLY the array and nothing else.
+
+Thank you! <3`,
         });
 
         const cleaned = questions
