@@ -1,8 +1,31 @@
 import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
 import { db } from "@/firebase/admin";
+
+// CORS headers configuration
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*', // Allow all origins, or specify your domain: 'http://localhost:3000'
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
+};
+
+// Handle preflight OPTIONS request
+export async function OPTIONS() {
+    return new Response(null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
+
 export async function GET() {
-    return Response.json({ success: true, data: "Thank you!" }, { status: 200 });
+    return Response.json(
+        { success: true, data: "Thank you!" }, 
+        { 
+            status: 200,
+            headers: corsHeaders
+        }
+    );
 }
 
 export async function POST(request: Request) {
@@ -30,7 +53,7 @@ export async function POST(request: Request) {
             - Do NOT include any explanations or extra content.
             - Format your output strictly as a JSON array:
             ["Question 1", "Question 2", "Question 3"]
-            
+                        
             Thank you! <3`,
         });
 
@@ -53,9 +76,21 @@ export async function POST(request: Request) {
 
         await db.collection("quizzes").add(quiz);
 
-        return Response.json({ success: true }, { status: 200 });
+        return Response.json(
+            { success: true }, 
+            { 
+                status: 200,
+                headers: corsHeaders
+            }
+        );
     } catch (error) {
         console.error("Error:", error);
-        return Response.json({ success: false, error }, { status: 500 });
+        return Response.json(
+            { success: false, error }, 
+            { 
+                status: 500,
+                headers: corsHeaders
+            }
+        );
     }
 }
