@@ -32,6 +32,9 @@ export const QuizMaster: CreateAssistantDTO = {
     provider: "deepgram",
     model: "nova-2",
     language: "en",
+    smartFormat: true,   // Enables punctuation and capitalization
+    numerals: true,       // Converts spoken numbers to digits
+    endpointing: 300      // Waits for 300ms of silence before finalizing
   },
   voice: {
     provider: "11labs",
@@ -65,7 +68,7 @@ Quiz Guidelines:
 7. Speak clearly and slowly — this is a voice interface.
 8. Do **not** use symbols, special characters, or markdown formatting.
 9. Once all questions are completed, thank the user and end the conversation:
-   - “That’s the end of the quiz. Thanks for playing with Knovo!”
+  - “That’s the end of the quiz. Thanks for playing with Knovo!”
 
 Answer Expectations Based on Quiz Type:
 - The quiz type is provided separately as {{type}}.
