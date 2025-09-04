@@ -37,13 +37,9 @@ export const QuizMaster: CreateAssistantDTO = {
     endpointing: 300      // Waits for 300ms of silence before finalizing
   },
   voice: {
-    provider: "11labs",
-    voiceId: "sarah",
-    stability: 0.4,
-    similarityBoost: 0.8,
-    speed: 0.7,
-    style: 0.5,
-    useSpeakerBoost: true,
+    provider: "deepgram",
+    voiceId: "orpheus",
+
   },
   model: {
     provider: "openai",
