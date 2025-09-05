@@ -54,46 +54,58 @@ export async function createFeedback(params: CreateFeedbackParams) {
       .join("");
 
     const prompt = `
-You are an AI evaluator analyzing a voice-based quiz session on Knovo.
+You are an AI evaluator analyzing a voice-based quiz session transcript from the Knovo platform. Your goal is to provide a detailed, well-structured evaluation based on the rules provided.
 
-Quiz Type: ${quizType || "unknown"}
-Transcript:
+**Quiz Type:** ${quizType || "unknown"}
+
+**Transcript of the Session:**
 ${formattedTranscript}
 
-Evaluation Rules:
-1. The total score is 100.
-2. Score should be equally divided among all questions.
-3. For each question:
-   - If quiz type is "true/false" or "multiple choice":
-     - Evaluate based on **correctness** and **response speed**.
-     - Deduct marks for delays, hesitations, or wrong answers.
-     - Fill other sections with N/A and give score in them as '0'.
-   - If quiz type is "verbal answer":
-     - Evaluate based on **fluency**, **articulation**, **correctness** and **speed**.
-     - Partial scores are allowed.
-4. Provide:
-   - A per-question score with reasoning
-   - Category-wise breakdown (Speed, Accuracy, Fluency, etc.)
-   - List of user strengths 
-   - List of areas for improvement (If the user was perfect, say "None")
-   - A final summary assessment in case of verbal answers. And for other types like MCQ/ True-False , Show the Answer Key (all correct answers) and compare it with the user's answers.
-   - FORMATTING REQUIREMENTS FOR MCQ/TRUE-FALSE:
-      When displaying Answer Key and Comparison, use this EXACT format:
+---
 
-      **ANSWER KEY & COMPARISON:**
+### **Evaluation Rules & Output Structure**
 
-      Question 1: [Question text]
-      ✓ Correct Answer: [correct option/answer]
-      User's Answer: [user's response] - [Correct / Incorrect /  Skipped]
+**1. Scoring:**
+   - The total score for the quiz is 100.
+   - The score must be divided equally among all questions present in the transcript.
 
-      Question 2: [Question text] 
-      ✓ Correct Answer: [correct option/answer]
-      User's Answer: [user's response] - [Correct / Incorrect /  Skipped]
+**2. Evaluation Criteria (Based on Quiz Type):**
+   - **For "True/False" or "Multiple Choice" Quizzes:**
+     - Evaluate primarily on **correctness** and **response speed**.
+     - Deduct marks for incorrect answers, significant delays, or expressions of uncertainty.
+     - For other categories like Fluency/Articulation, mark them as 'N/A' and assign a score of '0'.
+   - **For "Verbal Answer" Quizzes:**
+     - Evaluate based on a combination of **fluency**, **articulation**, **correctness**, and **response speed**.
+     - Partial scores are encouraged for answers that are partially correct or well-articulated but slightly inaccurate.
 
-      [Continue this format for ALL questions...]
+**3. Required Output Sections:**
+   You must provide the following sections in your evaluation:
+   - A per-question score with brief reasoning.
+   - Category-wise score breakdown (e.g., Speed, Accuracy, Fluency).
+   - A bulleted list of user strengths.
+   - A bulleted list of areas for improvement (If the user was perfect, state "None").
+   - A final summary assessment for "Verbal Answer" quizzes OR an "Answer Key & Comparison" for other types.
+
+---
+
+### **CRITICAL FORMATTING INSTRUCTIONS FOR MCQ / TRUE/FALSE**
+
+This section is mandatory for "Multiple Choice" and "True/False" quizzes. You MUST generate the "Answer Key & Comparison" using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
+
+**ANSWER KEY & COMPARISON:**
+
+**Question 1:** [Full text of the first question]
+* **✓ Correct Answer:** [The correct option or answer, e.g., "Paris" or "True"]
+* **Your Answer:** [The user's response] - **[Correct / Incorrect / Skipped]**
+
+**Question 2:** [Full text of the second question]
+* **✓ Correct Answer:** [The correct option or answer]
+* **Your Answer:** [The user's response] - **[Correct / Incorrect / Skipped]**
+
+(Continue this exact format for all subsequent questions in the quiz)
 `;
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-001", {
+      model: google("gemini-2.5-pro", {
         structuredOutputs: false,
       }),
       schema: feedbackSchema,
