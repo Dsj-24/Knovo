@@ -36,11 +36,13 @@ export const QuizMaster: CreateAssistantDTO = {
     numerals: true,       // Converts spoken numbers to digits
     endpointing: 200      // Waits for 200ms of silence before finalizing
   },
-  voice: {
+ voice: {
     provider: "11labs",
-    model: "eleven_turbo_v2",
-    language: "en",
-    voiceId: "Rachel",
+    voiceId: "Mohit",
+    stability: 0.5,
+    speed: 0.8,
+    style: 0.5,
+    useSpeakerBoost: true,
   },
   model: {
     provider: "openai",
