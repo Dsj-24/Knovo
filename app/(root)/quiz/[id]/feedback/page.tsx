@@ -54,7 +54,7 @@ const Feedback = async ({ params }: RouteParams) => {
 
             <hr />
 
-            <p className="mt-4">{feedback?.finalAssessment}</p>
+            <p className="mt-4"><h2 className="text-2xl font-semibold">Summary & Results:</h2>{feedback?.finalAssessment}</p>
 
             {/* Quiz Breakdown */}
             <div className="flex flex-col gap-6 mt-8">

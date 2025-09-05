@@ -34,16 +34,16 @@ export const QuizMaster: CreateAssistantDTO = {
     language: "en",
     smartFormat: true,   // Enables punctuation and capitalization
     numerals: true,       // Converts spoken numbers to digits
-    endpointing: 300      // Waits for 300ms of silence before finalizing
+    endpointing: 200      // Waits for 200ms of silence before finalizing
   },
   voice: {
-    provider: "deepgram",
-    voiceId: "orpheus",
+    provider: "hume",
+    voiceId: "b9f6f4a5-6d1c-4f3b-8f3e-2e3b1c4d5e6f", // Example voice ID
 
   },
   model: {
     provider: "openai",
-    model: "gpt-4",
+    model: "gpt-4o",
     messages: [
       {
         role: "system",
