@@ -67,33 +67,30 @@ Evaluation Rules:
    - If quiz type is "true/false" or "multiple choice":
      - Evaluate based on **correctness** and **response speed**.
      - Deduct marks for delays, hesitations, or wrong answers.
-     - Fill other sections with N/A.
-   - If quiz type is "verbal answer":
-     - Evaluate based on **fluency**, **articulation**, and **correctness**.
-     - Partial scores are allowed.
      - Fill other sections with N/A and give score in them as '0'.
+   - If quiz type is "verbal answer":
+     - Evaluate based on **fluency**, **articulation**, **correctness** and **speed**.
+     - Partial scores are allowed.
 4. Provide:
    - A per-question score with reasoning
    - Category-wise breakdown (Speed, Accuracy, Fluency, etc.)
    - List of user strengths 
    - List of areas for improvement (If the user was perfect, say "None")
-   - A final summary assessment in case of verbal answers. And for other types like MCQ/TF, Show the Answer Key (all correct answers) and compare it with the user's answers.
+   - A final summary assessment in case of verbal answers. And for other types like MCQ/ True-False , Show the Answer Key (all correct answers) and compare it with the user's answers.
+   - FORMATTING REQUIREMENTS FOR MCQ/TRUE-FALSE:
+      When displaying Answer Key and Comparison, use this EXACT format:
 
-   FORMATTING REQUIREMENTS FOR MCQ/TRUE-FALSE:
-=============================================
-When displaying Answer Key and Comparison, use this EXACT format:
+      **ANSWER KEY & COMPARISON:**
 
-📋 **ANSWER KEY & COMPARISON:**
+      Question 1: [Question text]
+      ✓ Correct Answer: [correct option/answer]
+      User's Answer: [user's response] - [Correct / Incorrect /  Skipped]
 
-Question 1: [Question text]
-✓ Correct Answer: [correct option/answer]
-👤 User's Answer: [user's response] - [✅ Correct / ❌ Incorrect / ⚠️ Skipped]
+      Question 2: [Question text] 
+      ✓ Correct Answer: [correct option/answer]
+      User's Answer: [user's response] - [Correct / Incorrect /  Skipped]
 
-Question 2: [Question text] 
-✓ Correct Answer: [correct option/answer]
-👤 User's Answer: [user's response] - [✅ Correct / ❌ Incorrect / ⚠️ Skipped]
-
-[Continue this format for ALL questions...]
+      [Continue this format for ALL questions...]
 `;
     const { object } = await generateObject({
       model: google("gemini-2.0-flash-001", {
