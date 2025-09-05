@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+
+const LoadingSpinner = () => (
+  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+)
+
+// Loading Overlay Component
+const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
+  if (!isLoading) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 flex flex-col items-center gap-4 shadow-xl">
+        <LoadingSpinner />
+        <p className="text-gray-700 font-medium">{message}</p>
+      </div>
+    </div>
+  )
+}
 
 const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
     const feedback = null as Feedback|null;
@@ -10,8 +28,13 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
     const formattedDate = dayjs(
         createdAt || Date.now()
     ).format("MMM D, YYYY");
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
+      <>
+
+      <LoadingOverlay isLoading={isLoading} message="Loading Quiz..." />
+
         <div className="card-border w-[360px] max-sm:w-full min-h-96">
             <div className="card-interview">
                 <div>
@@ -44,7 +67,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
           </p>
                 </div>
             <div className="flex flex-row justify-between">
-          <Button className="btn-primary text-lg p-6">
+          <Button className="btn-primary text-lg p-6" onClick={() => setIsLoading(true)} disabled={isLoading}>
             <Link
               href={
                 feedback
@@ -57,7 +80,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
           </Button>
         </div>
             </div>
-        </div>
+        </div></>
     )
 }
 
