@@ -125,6 +125,12 @@ EVALUATION GUIDELINES:
    
    📋 **FINAL ASSESSMENT**
    [2-3 sentence overall summary with encouragement and next steps]
+   
+   For MCQ/True-False: Include the answer key and comparison here as well:
+   **Answer Key Summary:**
+   Q1: [Correct] vs Your Answer: [Response] [✅/❌/⚠️]
+   Q2: [Correct] vs Your Answer: [Response] [✅/❌/⚠️]
+   [Continue for all questions...]
 
 FORMATTING NOTES:
 - Use clear headings with emojis for better readability
@@ -132,6 +138,7 @@ FORMATTING NOTES:
 - Use ✅❌⚠️ symbols for visual clarity
 - Avoid cluttered text - use line breaks and bullet points
 - Make the feedback actionable and constructive
+- For MCQ/T-F: Always include answer key 
 `;
     const { object } = await generateObject({
       model: google("gemini-2.0-flash-001", {
