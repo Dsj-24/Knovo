@@ -19,7 +19,7 @@ const AuthFormSchema = (type: FormType) => {
   })
 }
 
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from "sonner"
 import Link from "next/link"
 import FormField from "./FormFeild"
@@ -49,8 +49,6 @@ const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: s
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const formSchema = AuthFormSchema(type);
-
-
 
   // Conventiional Loading method
   const [isLoading,setLoading] = useState(false);
@@ -164,6 +162,3 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
 export default AuthForm
 
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.")
-}
