@@ -92,35 +92,17 @@ ${formattedTranscript}
 
 This section is mandatory for "Multiple Choice" and "True/False" quizzes. You MUST generate the "Answer Key & Comparison" using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
 
-### **CRITICAL HTML FORMATTING FOR MCQ / TRUE/FALSE**
+Answer Key & Comparison:
 
-This section is mandatory for "Multiple Choice" and "True/False" quizzes. The value for the \`finalAssessment\` field in your output object MUST be a single HTML string. **Do not use markdown.** Use the precise HTML structure and tags shown in the example below.
+**Question 1:** [Full text of the first question]
+* **✓ Correct Answer:** [The correct option or answer, e.g., "Paris" or "True"]
+* **Your Answer:** [The user's response] - **[Correct / Incorrect / Skipped]**
 
-**Required HTML Structure for \`finalAssessment\`:**
+**Question 2:** [Full text of the second question]
+* **✓ Correct Answer:** [The correct option or answer]
+* **Your Answer:** [The user's response] - **[Correct / Incorrect / Skipped]**
 
-\`\`\`html
-<div>
-  <h3>ANSWER KEY & COMPARISON</h3>
-  
-  <div style="margin-bottom: 16px; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
-    <p><strong>Question 1:</strong> [Full text of the first question]</p>
-    <ul style="list-style-type: none; padding-left: 10px; margin-top: 8px;">
-      <li><strong>✓ Correct Answer:</strong> [The correct option or answer]</li>
-      <li><strong>Your Answer:</strong> [The user's response] - <strong>[Correct / Incorrect / Skipped]</strong></li>
-    </ul>
-  </div>
-
-  <div style="margin-bottom: 16px; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
-    <p><strong>Question 2:</strong> [Full text of the second question]</p>
-    <ul style="list-style-type: none; padding-left: 10px; margin-top: 8px;">
-      <li><strong>✓ Correct Answer:</strong> [The correct option or answer]</li>
-      <li><strong>Your Answer:</strong> [The user's response] - <strong>[Correct / Incorrect / Skipped]</strong></li>
-    </ul>
-  </div>
-</div>
-\`\`\`
-
-(Continue this exact HTML block format for all subsequent questions. The entire output for the \`finalAssessment\` field must be one continuous HTML string.)
+(Continue this exact format for all subsequent questions in the quiz)
 `;
     const { object } = await generateObject({
       model: google("gemini-2.5-pro", {
