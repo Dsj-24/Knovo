@@ -75,11 +75,10 @@ Evaluation Rules:
 4. Provide:
    - A per-question score with reasoning
    - Category-wise breakdown (Speed, Accuracy, Fluency, etc.)
-   - List of user strengths
-   - List of areas for improvement
+   - List of user strengths 
+   - List of areas for improvement (If the user was perfect, say "None")
    - A final summary assessment in case of verbal answers. And for other types like MCQ/TF, Show the Answer Key (all correct answers) and compare it with the user's answers.
 `;
-
     const { object } = await generateObject({
       model: google("gemini-2.0-flash-001", {
         structuredOutputs: false,
