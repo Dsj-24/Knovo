@@ -68,7 +68,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
           </p>
                 </div>
             <div className="flex flex-row justify-between">
-          <Button className="btn-primary text-lg p-6" onClick={() => setIsLoading(true)} disabled={isLoading}>
+          <Button className="btn-primary text-lg p-6" onClick={() => setIsLoading(true)}>
             <Link
               href={
                 feedback
