@@ -31,8 +31,8 @@ import { auth } from "@/firebase/client"
 const LoadingSpinner = () => (
   <div className="relative flex items-center justify-center">
     {/* Outer rotating ring with gradient effect */}
-    <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600 border-r-blue-400"></div>
-    
+    <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600"></div>
+
     {/* Inner pulsing dot for extra visual appeal */}
     <div className="absolute animate-pulse rounded-full h-2 w-2 bg-blue-600"></div>
   </div>
