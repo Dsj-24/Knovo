@@ -29,18 +29,34 @@ import { signIn, signUp } from "@/lib/actions/auth.action"
 import { auth } from "@/firebase/client"
 
 const LoadingSpinner = () => (
-  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+  <div className="relative flex items-center justify-center">
+    {/* Outer rotating ring with gradient effect */}
+    <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600 border-r-blue-400"></div>
+    
+    {/* Inner pulsing dot for extra visual appeal */}
+    <div className="absolute animate-pulse rounded-full h-2 w-2 bg-blue-600"></div>
+  </div>
 )
 
-// Loading Overlay Component
+// Enhanced Loading Overlay with smoother animations
 const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-8 flex flex-col items-center gap-4 shadow-xl">
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
         <LoadingSpinner />
-        <p className="text-gray-700 font-medium">{message}</p>
+        
+        <div className="text-center">
+          <p className="text-gray-700 font-semibold text-lg mb-2">{message}</p>
+          
+          {/* Animated dots below the message */}
+          <div className="flex justify-center space-x-1">
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce"></div>
+          </div>
+        </div>
       </div>
     </div>
   )
