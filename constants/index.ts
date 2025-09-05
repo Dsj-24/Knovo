@@ -38,7 +38,7 @@ export const QuizMaster: CreateAssistantDTO = {
   },
  voice: {
     provider: "deepgram",
-    model: "aura-2",
+    model: "aura",
     voiceId: "luna",
   },
   model: {
