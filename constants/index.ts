@@ -98,7 +98,6 @@ export const feedbackSchema = z.object({
         "Accuracy",
         "Fluency",
         "Articulation",
-        "Correctness"
       ]),
       score: z.number(),
       comment: z.string(),

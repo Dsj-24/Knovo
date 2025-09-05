@@ -67,15 +67,17 @@ Evaluation Rules:
    - If quiz type is "true/false" or "multiple choice":
      - Evaluate based on **correctness** and **response speed**.
      - Deduct marks for delays, hesitations, or wrong answers.
+     - Fill other sections with N/A.
    - If quiz type is "verbal answer":
      - Evaluate based on **fluency**, **articulation**, and **correctness**.
      - Partial scores are allowed.
+     - Fill other sections with N/A.
 4. Provide:
    - A per-question score with reasoning
    - Category-wise breakdown (Speed, Accuracy, Fluency, etc.)
    - List of user strengths
    - List of areas for improvement
-   - A final summary assessment
+   - A final summary assessment in case of verbal answers. And for other types like MCQ/TF, Show the Answer Key (all correct answers) and compare it with the user's answers.
 `;
 
     const { object } = await generateObject({
