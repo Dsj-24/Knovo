@@ -28,9 +28,32 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { signIn, signUp } from "@/lib/actions/auth.action"
 import { auth } from "@/firebase/client"
 
+const LoadingSpinner = () => (
+  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+)
+
+// Loading Overlay Component
+const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
+  if (!isLoading) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 flex flex-col items-center gap-4 shadow-xl">
+        <LoadingSpinner />
+        <p className="text-gray-700 font-medium">{message}</p>
+      </div>
+    </div>
+  )
+}
+
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const formSchema = AuthFormSchema(type);
+
+
+
+  // Conventiional Loading method
+  const [isLoading,setLoading] = useState(false);
 
   // Definition of the form //
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +67,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   // 2.Submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     try {
       if (type === 'sign-up') {
         const { name, email, password } = values;
@@ -91,6 +115,13 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const isSignIn = type === "sign-in"
   return (
+    <>
+
+     <LoadingOverlay 
+        isLoading={isLoading} 
+        message={isSignIn ? "Signing you in..." : "Creating your account..."} 
+      />
+
     <div className="card-border lg:min-w-[546px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
         <div className="flex flex-row gap-2 justify-center items-center">
@@ -127,8 +158,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
         <p className="text-center">{isSignIn ? 'No account yet' : 'Have an account already?'}
           <Link href={!isSignIn ? '/sign-in' : '/sign-up'} className="font-bold text-user-primary ml-1">{!isSignIn ? "Sign In" : "Sign Up"}</Link>
         </p>
-      </div></div>
+      </div></div></>
   )
 }
 
 export default AuthForm
+
+function useState(arg0: boolean): [any, any] {
+  throw new Error("Function not implemented.")
+}

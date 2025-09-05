@@ -20,12 +20,33 @@ interface SavedMessage {
     content: string;
 }
 
+// Loading Spinner Component
+const LoadingSpinner = () => (
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+)
+
+// Loading Overlay Component
+const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
+    if (!isLoading) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-8 flex flex-col items-center gap-4 shadow-xl">
+                <LoadingSpinner />
+                <p className="text-gray-700 font-medium">{message}</p>
+            </div>
+        </div>
+    )
+}
+
 const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId }: AgentProps) => {
     const router = useRouter();
     const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
     const [messages, setMessages] = useState<SavedMessage[]>([]);
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [lastMessage, setLastMessage] = useState<string>("");
+    const [isGeneratingFeedback, setIsGeneratingFeedback] = useState(false);
+
 
     useEffect(() => {
         const onCallStart = () => {
@@ -81,6 +102,7 @@ useEffect(() => {
 
         const handleGenerateFeedback = async (messages: SavedMessage[]) => {
             console.log("handleGenerateFeedback");
+            setIsGeneratingFeedback(true);
 
             const { success, feedbackId: id } = await createFeedback({
                 quizId: quizId!,
@@ -94,6 +116,7 @@ useEffect(() => {
                 router.push(`/quiz/${quizId}/feedback`);
             } else {
                 console.log("Error saving feedback");
+                setIsGeneratingFeedback(false);
                 router.push("/");
             }
         };
@@ -148,6 +171,11 @@ useEffect(() => {
 
     return (
         <>
+
+          <LoadingOverlay 
+                isLoading={isGeneratingFeedback} 
+                message="Generating your personalized feedback..." 
+            />
 
             <div className='call-view mb-12'>
                 <div className='card-interviewer'>

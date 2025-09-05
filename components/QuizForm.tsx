@@ -84,9 +84,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
         } catch (error: any) {
             toast.error(`Failed to generate quiz: ${error.message}`);
             console.error("Quiz generation error:", error);
-        } finally {
-            setIsLoading(false);
-        }
+        } 
     }
 
     return (
