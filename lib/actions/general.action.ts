@@ -66,52 +66,50 @@ ${formattedTranscript}
 ### **Evaluation Rules & Output Structure**
 
 **1. Scoring:**
-    - The total score for the quiz is 100.
-    - The score must be divided equally among all questions present in the transcript. Questions with an invalid response should receive 0 marks.
+   - The total score for the quiz is 100.
+   - The score must be divided equally among all questions present in the transcript.
 
 **2. Evaluation Criteria (Based on Quiz Type):**
-    - **For "True/False" or "Multiple Choice" Quizzes:**
-      - Evaluate primarily on **correctness** and **response speed**.
-      - Deduct marks for incorrect answers, invalid responses, significant delays, or expressions of uncertainty.
-      - For other categories like Fluency/Articulation, mark them as 'N/A' and assign a score of '0'.
-    - **For "Verbal Answer" Quizzes:**
-      - Evaluate based on a combination of **fluency**, **articulation**, **correctness**, and **response speed**.
-      - Partial scores are encouraged for answers that are partially correct or well-articulated but slightly inaccurate.
-
-**3. Handling Invalid/Unclear Responses (CRITICAL for MCQ and True/False):**
-    - An answer is considered an "Invalid Response" if it does not match the expected format.
-    - Examples:
+   - **For "True/False" or "Multiple Choice" Quizzes:**
+     - Evaluate primarily on **correctness** and **response speed**.
+     - Deduct marks for incorrect answers, significant delays, or expressions of uncertainty.
+     - For other categories like Fluency/Articulation, mark them as 'N/A' and assign a score of '0'.
+   - **For "Verbal Answer" Quizzes:**
+     - Evaluate based on a combination of **fluency**, **articulation**, **correctness**, and **response speed**.
+     - Partial scores are encouraged for answers that are partially correct or well-articulated but slightly inaccurate.
+     - An answer is considered an "Invalid Response" if it does not match the expected format.
+     - Examples:
         - For a True/False question, if the transcript shows "calls", "coils", "blue", or any word other than "True" or "False", it is invalid.
         - For an MCQ, if the transcript shows "Option see" instead of "Option C", it is invalid.
-    - Do NOT try to interpret these as correct answers. They must be flagged as invalid.
+     - Try to interpret these as correct answers but they must be flagged as invalid.
 
-**4. Required Output Sections:**
-    You must provide the following sections in your evaluation:
-    - A brief summary paragraph.
-    - A per-question "Answer Key & Comparison".
-    - Category-wise score breakdown (e.g., Speed, Accuracy, Fluency).
-    - A bulleted list of user strengths.
-    - A bulleted list of areas for improvement (If the user was perfect, state "None").
+**3. Required Output Sections:**
+   You must provide the following sections in your evaluation:
+   - A per-question score with brief reasoning.
+   - Category-wise score breakdown (e.g., Speed, Accuracy, Fluency).
+   - A bulleted list of user strengths.
+   - A bulleted list of areas for improvement (If the user was perfect, state "None").
+   - A final summary assessment for "Verbal Answer" quizzes OR an "Answer Key & Comparison" for other types.
 
----
+**4. Critical formatting instructions for MCQ / TRUE/FALSE**
+   - This section is mandatory for "Multiple Choice" and "True/False" quizzes. You MUST generate the "Answer Key & Comparison" using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
+   - Answer Key & Comparison:
 
-### **CRITICAL FORMATTING INSTRUCTIONS FOR MCQ / TRUE/FALSE**
+   // Start
 
-This section is mandatory for "Multiple Choice" and "True/False" quizzes.
+     Question 1: [Full text of the first question]
+     ✓ Correct Answer: [The correct option or answer, e.g., "Paris" or "True"]
+     Your Answer: [The user's response] - [Correct / Incorrect / Skipped] .
 
-**A. Summary Paragraph:**
-Start with a concise, 2-3 sentence paragraph. State the overall score, the number of correctly answered questions, and the primary reason for score deductions (e.g., issues with response clarity leading to invalid answers, or incorrect answers). **Avoid using bold markdown ("**") within this paragraph.**
+     Question 2: [Full text of the second question]
+     ✓ Correct Answer: [The correct option or answer]
+     Your Answer: [The user's response] - [Correct / Incorrect / Skipped] .
 
-**B. Answer Key & Comparison:**
-You MUST generate this section using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
+     [Same for Rest of the questions...]
 
-**Question 1:** [Full text of the first question]
-* ✓ **Correct Answer:** [The correct option or answer]
-* Your Answer: [The user's transcribed response] - **[Correct / Incorrect / Skipped / Invalid Response]**
+   // End
 
-**Question 2:** [Full text of the second question]
-* ✓ **Correct Answer:** [The correct option or answer]
-* Your Answer: [The user's transcribed response] - **[Correct / Incorrect / Skipped / Invalid Response]**
+   - After each question, correct answer and your answer , add a full stop (.) to indicate the end of that entry.
 
 (Continue this exact format for all subsequent questions in the quiz)
 `;
@@ -132,7 +130,7 @@ You MUST generate this section using the precise format below. **Ensure there is
       categoryScores: object.categoryScores,
       strengths: object.strengths,
       areasForImprovement: object.areasForImprovement,
-      finalAssessment: object.finalAssessment,
+      finalAssessment: object.finalAssessment.replaceAll('.', '.\n'),
       createdAt: new Date().toISOString(),
     };
 

@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { signIn, signUp } from "@/lib/actions/auth.action"
 import { auth } from "@/firebase/client"
+import ForgotPasswordModal from "./ForgotPasswordModal"
 
 const LoadingSpinner = () => (
   <div className="relative flex items-center justify-center">
@@ -68,6 +69,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   // Conventiional Loading method
   const [isLoading,setLoading] = useState(false);
+  const [isForgotPasswordOpen, setForgotPasswordOpen] = useState(false); 
 
   // Definition of the form //
   const form = useForm<z.infer<typeof formSchema>>({
@@ -137,6 +139,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
         message={isSignIn ? "Signing you in..." : "Creating your account..."} 
       />
 
+       <ForgotPasswordModal
+        isOpen={isForgotPasswordOpen}
+        onClose={() => setForgotPasswordOpen(false)}
+      />
+
     <div className="card-border lg:min-w-[546px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
         <div className="flex flex-row gap-2 justify-center items-center">
@@ -166,6 +173,21 @@ const AuthForm = ({ type }: { type: FormType }) => {
               label="Password"
               placeholder="Enter Password"
               type="password" />
+
+             {/* --- ADD THIS FORGOT PASSWORD LINK --- */}
+              {isSignIn && (
+                <div className="flex justify-end -mt-4">
+                  <p
+                    onClick={() => setForgotPasswordOpen(true)}
+                    className="text-sm font-medium text-user-primary hover:underline cursor-pointer"
+                  >
+                    Forgot Password?
+                  </p>
+                </div>
+              )}
+              {/* --- END OF ADDITION --- */}
+
+              
             <Button className="btn" type="submit">{isSignIn ? 'Sign In' : 'Create an Account'}</Button>
           </form>
         </Form>
