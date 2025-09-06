@@ -63,7 +63,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={isSubmitting}
-              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" // Added some input styling for better appearance
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black" // Added some input styling for better appearance
             />
           </div>
 
