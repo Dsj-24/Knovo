@@ -89,11 +89,11 @@ ${formattedTranscript}
    - Category-wise score breakdown (e.g., Speed, Accuracy, Fluency).
    - A bulleted list of user strengths.
    - A bulleted list of areas for improvement (If the user was perfect, state "None").
-   - A final summary assessment for "Verbal Answer" quizzes OR an "Answer Key & Comparison" for other types.
+   - A final summary assessment for "Verbal Answer" quizzes OR an "Answer Key & Results" for other types.
 
 **4. Critical formatting instructions for MCQ / TRUE/FALSE**
-   - This section is mandatory for "Multiple Choice" and "True/False" quizzes. You MUST generate the "Answer Key & Comparison" using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
-   - Answer Key & Comparison:
+   - This section is mandatory for "Multiple Choice" and "True/False" quizzes. You MUST generate the "Answer Key & Results" using the precise format below. **Ensure there is a blank line between each question's entry for readability.**
+   - Answer Key & Results :
 
    // Start
 
@@ -109,7 +109,7 @@ ${formattedTranscript}
 
    // End
 
-   - After each question, correct answer and your answer , add a full stop (.) to indicate the end of that entry.
+   - After each question, correct answer and your answer , add a full stop (.) to indicate the end of that entry and add a space next to that full stop.
 
 (Continue this exact format for all subsequent questions in the quiz)
 `;

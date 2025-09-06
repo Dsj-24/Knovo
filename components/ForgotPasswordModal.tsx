@@ -70,15 +70,6 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
           {/* This flex container ensures buttons are side-by-side and take full width */}
           <div className="flex gap-4 w-full"> 
             <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              disabled={isSubmitting}
-              className="w-full py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors" // Adjusted button styling
-            >
-              Cancel
-            </Button>
-            <Button
               type="submit"
               disabled={isSubmitting}
               className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors btn" // Adjusted button styling, ensure 'btn' is correctly applying your custom styles
