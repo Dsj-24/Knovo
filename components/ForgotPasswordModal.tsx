@@ -31,7 +31,6 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
       toast.success("Password reset link sent! Please check your email inbox (and spam folder).");
       onClose(); // Close the modal on success
     } catch (error: any) {
-      // Provide user-friendly error messages
       if (error.code === 'auth/invalid-email') {
         toast.error("The email address is not valid.");
       } else {
@@ -39,7 +38,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
       }
     } finally {
       setIsSubmitting(false);
-      setEmail(''); // Clear the email field
+      setEmail('');
     }
   };
 
@@ -47,7 +46,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 w-full max-w-md animate-slideIn">
+      <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 w-full max-w-lg md:max-w-xl animate-slideIn"> {/* Adjusted max-w-md to max-w-lg or md:max-w-xl for a wider modal */}
         <h2 className="text-2xl font-bold text-gray-800">Reset Your Password</h2>
         <p className="text-center text-gray-600">
           Enter the email address associated with your account, and we’ll send you a link to reset your password.
@@ -64,24 +63,25 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={isSubmitting}
-              className="w-full"
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" // Added some input styling for better appearance
             />
           </div>
 
-          <div className="flex gap-4">
+          {/* This flex container ensures buttons are side-by-side and take full width */}
+          <div className="flex gap-4 w-full"> 
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
               disabled={isSubmitting}
-              className="w-full"
+              className="w-full py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors" // Adjusted button styling
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full btn"
+              className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors btn" // Adjusted button styling, ensure 'btn' is correctly applying your custom styles
             >
               {isSubmitting ? 'Sending...' : 'Send Reset Link'}
             </Button>
