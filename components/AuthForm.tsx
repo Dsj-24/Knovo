@@ -122,7 +122,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
   router.push("/");
       }
     } catch (e:any) {
-      toast.error(`There was an error : ${e.message}`)
+      toast.error(`There was an error : ${e.message}`);
+      setLoading(false);
     }
     console.log(values)
   }
