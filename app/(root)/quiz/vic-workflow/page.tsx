@@ -1,8 +1,17 @@
+import Agent from '@/components/Agent';
+import { getCurrentUser } from '@/lib/actions/auth.action'
 import React from 'react'
 
-const VicWorkFlow = () => {
+const VicWorkFlow = async () => {
+
+  const user = await getCurrentUser();
   return (
-    <div>VicWorkFlow</div>
+   <>
+            <Agent
+                userName={user?.name!}
+                userId={user?.id}
+                type="generate"
+            /></>
   )
 }
 
