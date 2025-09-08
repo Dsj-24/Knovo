@@ -29,7 +29,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-    const { type, topic, difficulty, questions, amount, userId } = await request.json();
+    const { type, topic, difficulty, amount, userId } = await request.json();
 
     try {
         const { text: questions } = await generateText({
