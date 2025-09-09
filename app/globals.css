@@ -62,7 +62,7 @@
 }
 
 .dark {
-  --background: #3b0a18;
+  --background: #3e0c44;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -294,7 +294,7 @@
 }
 
 @utility dark-gradient {
-  @apply bg-gradient-to-b from-[#530558] to-[#310125];
+   @apply bg-gradient-to-b from-[#240853] to-[#310031];
 }
 
 @utility border-gradient {

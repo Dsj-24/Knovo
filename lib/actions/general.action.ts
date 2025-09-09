@@ -167,3 +167,30 @@ export async function getFeedbackByQuizId(
   const feedbackDoc = querySnapshot.docs[0];
   return { id: feedbackDoc.id, ...feedbackDoc.data() } as Feedback;
 }
+
+export async function getBestFeedbackByUserId(
+  params: GetFeedbackByQuizIdParams
+): Promise<Feedback | null> {
+  const { quizId, userId } = params;
+
+  const querySnapshot = await db
+    .collection("feedback")
+    .where("quizId", "==", quizId)
+    .where("userId", "==", userId)
+    .get();
+
+  if (querySnapshot.empty) return null;    
+
+ // 2. Map all documents to an array of Feedback objects
+  const allFeedback = querySnapshot.docs.map(doc => {
+    return { id: doc.id, ...doc.data() } as Feedback;
+  });
+
+  // 3. Use .reduce() to find the one with the highest totalScore
+  const highestScoreFeedback = allFeedback.reduce((max, current) => {
+    // If the current feedback's score is higher than the max we've seen so far, it becomes the new max
+    return current.totalScore > max.totalScore ? current : max;
+  });
+
+  return highestScoreFeedback;
+}

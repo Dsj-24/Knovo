@@ -6,15 +6,17 @@ import { dummyQuizzes } from '../../constants/index';
 import QuizCard from '@/components/QuizCard';
 import { get } from 'http';
 import { getCurrentUser } from '@/lib/actions/auth.action';
-import { getLatestQuizzes, getQuizzesByUserId } from '@/lib/actions/general.action';
+import { getLatestQuizzes, getQuizzesByUserId , getFeedbackByQuizId } from '@/lib/actions/general.action';
 
 const Home = async () => {
 
 const user= await getCurrentUser();
-const [userQuizzes,  allQuizzes] = await Promise.all([
+const [userQuizzes,  allQuizzes ] = await Promise.all([
   await getQuizzesByUserId(user?.id!),
-  await getLatestQuizzes({ userId: user?.id! })
+  await getLatestQuizzes({ userId: user?.id! }),
+
 ]);
+  
 
   const hasPastQuizzes = userQuizzes?.length! > 0;
   //@ts-ignore
@@ -42,7 +44,7 @@ Practice any type of questions and get instant feedback on Knowledge and Vocal a
    </section>
 
    <section className="flex flex-col gap-6 mt-8"> 
-   <h2>Your Quizes</h2>
+   <h2>Your Quizzes</h2>
 
 
    <div className="interviews-section">

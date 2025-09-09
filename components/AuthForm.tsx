@@ -150,7 +150,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           <Image src="/logo.svg" alt="logo" height={32} width={38} />
           <h2 className="text-primary-100">KNOVO</h2>
         </div>
-        <h3 className="text-center">Practice Personalized quizzes with AI</h3>
+        <h2 className="text-center">Practice Personalized quizzes with AI</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
             {!isSignIn && (<FormField
@@ -188,11 +188,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
               {/* --- END OF ADDITION --- */}
 
               
-            <Button className="btn" type="submit">{isSignIn ? 'Sign In' : 'Create an Account'}</Button>
+            <Button className="btn text-xl" type="submit">{isSignIn ? 'Sign In' : 'Create Account'}</Button>
           </form>
         </Form>
 
-        <p className="text-center">{isSignIn ? 'No account yet' : 'Have an account already?'}
+        <p className="text-center text-xl">{isSignIn ? 'No account yet' : 'Have an account already?'}
           <Link href={!isSignIn ? '/sign-in' : '/sign-up'} className="font-bold text-user-primary ml-1">{!isSignIn ? "Sign In" : "Sign Up"}</Link>
         </p>
       </div></div></>
