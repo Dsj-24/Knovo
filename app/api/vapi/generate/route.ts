@@ -41,7 +41,6 @@ export async function POST(request: Request) {
                         {
                             type: 'text',
                             text: `You are a quiz generation assistant. Your task is to generate ${amount} quiz questions based *solely* on the content of the provided document.
-
 Settings:
 - Difficulty: ${difficulty}
 - Format: ${type} (must be one of: "true/false", "multiple choice", or "verbal answer")
@@ -56,7 +55,7 @@ IMPORTANT RULES:
 
  Format Requirements: 
  - For "multiple choice", each question must embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
- - For "true/false", format like: "The sky is green. True or False" 
+ - For "true/false", format like: "The sky is green. True or False." 
  - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." 
 
  Final Output Format: 

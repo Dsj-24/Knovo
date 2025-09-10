@@ -157,8 +157,8 @@ useEffect(() => {
                 process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!,
                 {
                     variableValues: {
-                        username: userName,
-                        userid: userId,
+                        userName: userName,
+                        userId: userId,
                     },
                 }
             );
