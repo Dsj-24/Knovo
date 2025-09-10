@@ -1,47 +1,53 @@
 import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
 import { db } from "@/firebase/admin";
+import { CoreMessage } from "ai";
 
-// CORS headers configuration
+// CORS headers are unchanged
 const corsHeaders = {
-    'Access-Control-Allow-Origin': '*', // Allow all origins, or specify your domain: 'http://localhost:3000'
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
+    'Access-Control-Max-Age': '86400',
 };
 
-// Handle preflight OPTIONS request
 export async function OPTIONS() {
-    return new Response(null, {
-        status: 200,
-        headers: corsHeaders
-    });
+    return new Response(null, { status: 200, headers: corsHeaders });
 }
 
 export async function GET() {
     return Response.json(
-        { success: true, data: "Thank you!" }, 
-        { 
-            status: 200,
-            headers: corsHeaders
-        }
+        { success: true, data: "Thank you!" },
+        { status: 200, headers: corsHeaders }
     );
 }
 
 export async function POST(request: Request) {
-    const { type, topic, difficulty, amount, userId } = await request.json();
+    const { type, topic, difficulty, amount, userId, pdfData, pdfName } = await request.json();
 
     try {
-        const { text: questions } = await generateText({
-            model: google("gemini-2.0-flash-001"),
-            prompt: `You are a quiz generation assistant.
+        let promptContent: CoreMessage[];
+        let quizTopic = topic;
 
-Your task is to generate ${amount} quiz questions for a user with the following settings:
-- Topic: ${topic}
+        if (pdfData) {
+            quizTopic = `Quiz from: ${pdfName}`;
+
+            // --- THIS IS THE CORRECTED SECTION THAT ACTUALLY READS THE PDF ---
+            promptContent = [
+                {
+                    role: 'user',
+                    content: [
+                        // Part 1: Your text instructions (without the pdfData string)
+                        {
+                            type: 'text',
+                            text: `You are a quiz generation assistant. Your task is to generate ${amount} quiz questions based *solely* on the content of the provided document.
+
+Settings:
 - Difficulty: ${difficulty}
 - Format: ${type} (must be one of: "true/false", "multiple choice", or "verbal answer")
 
 IMPORTANT RULES:
+- Base all questions STRICTLY on the information within the document. Do not use external knowledge.
 - ONLY generate questions in the specified format: "${type}".
 - Do NOT mix formats. All questions must follow "${type}" strictly.
 - Do NOT include answers or explanations.
@@ -49,38 +55,71 @@ IMPORTANT RULES:
 - Do NOT use special characters like "/", "*", or Markdown formatting.
 
 Format Requirements:
-- For "multiple choice", each question must embed options like:
-  "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome"
-- For "true/false", format like:
-  "The sky is green. True or False"
-- For "verbal answer", format like:
-  "Explain the importance of biodiversity in ecosystems."
+- For "multiple choice", embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome"
+- For "true/false", format like: "The sky is green. True or False"
+- For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems."
 
 Final Output Format:
 - Output must be a pure JSON array of strings.
-Example:
-[
-  "Question 1",
-  "Question 2",
-  ...
-]
+Example: ["Question 1", "Question 2"]
+- Do not wrap the array in markdown (no \`\`\`json or \`\`\`). Return ONLY the array.`
+                        },
+                        // Part 2: The actual PDF file data, sent separately
+                        {
+                            type: 'image', // The SDK uses 'image' as a generic container for file data
+                            image: Buffer.from(pdfData, 'base64'), // Converts Base64 string back to binary data
+                            mimeType: 'application/pdf',
+                        }
+                    ]
+                }
+            ];
+            // --- END OF CORRECTED SECTION ---
 
-Do not wrap the array in markdown (no \`\`\`json or \`\`\`).
-Return ONLY the array and nothing else.
+        } else {
+            // This is the original prompt for topic-based quizzes (this logic is correct)
+            promptContent = [
+                {
+                    role: 'user',
+                    content: `You are a quiz generation assistant. 
+Your task is to generate ${amount} quiz questions for a user with the following settings: 
+- Topic: ${topic} 
+- Difficulty: ${difficulty} 
+- Format: ${type}
 
-Thank you! <3`,
+ IMPORTANT RULES: 
+ - ONLY generate questions in the specified format: "${type}". 
+ - Do NOT mix formats. All questions must follow "${type}" strictly. 
+ - Do NOT include answers or explanations. 
+ - Do NOT include extra text before or after the list. 
+ - Do NOT use special characters like "/", "*", or Markdown formatting. 
+
+ Format Requirements: 
+ - For "multiple choice", embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
+ - For "true/false", format like: "The sky is green. True or False" 
+ - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." 
+
+ Final Output Format: 
+ - Output must be a pure JSON array of strings. 
+ Example: ["Question 1", "Question 2"] 
+ - Do not wrap the array in markdown (no \`\`\`json or \`\`\`). Return ONLY the array.`
+                }
+            ];
+        }
+ const { text: questions } = await generateText({
+            model: google('gemini-1.5-flash-latest'),
+            messages: promptContent,
         });
 
         const cleaned = questions
-            .replace(/```json\n?/g, '')  // Remove ```json or ```json\n
-            .replace(/```/g, '')         // Remove closing ```
+            .replace(/```json\n?/g, '')
+            .replace(/```/g, '')
             .trim();
 
         const parsedQuestions = JSON.parse(cleaned);
 
         const quiz = {
-            topic,
-            type, // e.g., "multiple choice", "true/false", "verbal answer"
+            topic: quizTopic,
+            type,
             difficulty,
             questions: parsedQuestions,
             userId: userId,
@@ -91,20 +130,14 @@ Thank you! <3`,
         await db.collection("quizzes").add(quiz);
 
         return Response.json(
-            { success: true }, 
-            { 
-                status: 200,
-                headers: corsHeaders
-            }
+            { success: true },
+            { status: 200, headers: corsHeaders }
         );
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error generating quiz:", error);
         return Response.json(
-            { success: false, error }, 
-            { 
-                status: 500,
-                headers: corsHeaders
-            }
+            { success: false, error: "Failed to generate quiz. Please check the model output or server logs." },
+            { status: 500, headers: corsHeaders }
         );
     }
 }
