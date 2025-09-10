@@ -83,10 +83,9 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                 difficulty: "medium",
                 amount: "",
                 userId: userId,
-            }
-          
-            );
-           router.push("/");
+            });
+
+            router.push("/");
         } catch (error: any) {
             toast.error(`Failed to generate quiz: ${error.message}`);
             console.error("Quiz generation error:", error);

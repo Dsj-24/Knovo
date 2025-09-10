@@ -29,7 +29,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-    const { type, topic, difficulty, amount, userid } = await request.json();
+    const { type, topic, difficulty, amount, userId } = await request.json();
 
     try {
         const { text: questions } = await generateText({
@@ -83,7 +83,7 @@ Thank you! <3`,
             type, // e.g., "multiple choice", "true/false", "verbal answer"
             difficulty,
             questions: parsedQuestions,
-            userId: userid,
+            userId: userId,
             finalized: true,
             createdAt: new Date().toISOString()
         };

@@ -52,8 +52,7 @@ const QuizPage = () => {
           className='object-contain' 
         />
         <h3 className="text-xl font-semibold text-center">Form Based Generation</h3>
-    </div>
-    
+    </div> 
     {/* Card 2: Voice Based Generation - Link to another page */}
     <Link href={"https://knovo-dhlb.vercel.app/quiz/vic-workflow"} className="flex-1">
         <div className="card-interviewer h-full rounded-4xl cursor-pointer hover:opacity-80 transition-opacity flex-1 flex flex-col items-center justify-center gap-6 p-8">
@@ -70,5 +69,4 @@ const QuizPage = () => {
 </div>
     )
 }
-
 export default QuizPage
