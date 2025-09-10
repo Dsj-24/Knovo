@@ -54,15 +54,24 @@ IMPORTANT RULES:
 - Do NOT include extra text before or after the list.
 - Do NOT use special characters like "/", "*", or Markdown formatting.
 
-Format Requirements:
-- For "multiple choice", embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome"
-- For "true/false", format like: "The sky is green. True or False"
-- For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems."
+ Format Requirements: 
+ - For "multiple choice", each question must embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
+ - For "true/false", format like: "The sky is green. True or False" 
+ - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." 
 
-Final Output Format:
-- Output must be a pure JSON array of strings.
-Example: ["Question 1", "Question 2"]
-- Do not wrap the array in markdown (no \`\`\`json or \`\`\`). Return ONLY the array.`
+ Final Output Format: 
+ - Output must be a pure JSON array of strings. 
+ Example: 
+ [ 
+   "Question 1", 
+   "Question 2", 
+   ... 
+ ] 
+
+ Do not wrap the array in markdown (no \`\`\`json or \`\`\`). 
+ Return ONLY the array and nothing else. 
+
+ Thank you! <3`
                         },
                         // Part 2: The actual PDF file data, sent separately
                         {
@@ -81,10 +90,11 @@ Example: ["Question 1", "Question 2"]
                 {
                     role: 'user',
                     content: `You are a quiz generation assistant. 
-Your task is to generate ${amount} quiz questions for a user with the following settings: 
-- Topic: ${topic} 
-- Difficulty: ${difficulty} 
-- Format: ${type}
+
+ Your task is to generate ${amount} quiz questions for a user with the following settings: 
+ - Topic: ${topic} 
+ - Difficulty: ${difficulty} 
+ - Format: ${type} (must be one of: "true/false", "multiple choice", or "verbal answer") 
 
  IMPORTANT RULES: 
  - ONLY generate questions in the specified format: "${type}". 
@@ -94,18 +104,27 @@ Your task is to generate ${amount} quiz questions for a user with the following 
  - Do NOT use special characters like "/", "*", or Markdown formatting. 
 
  Format Requirements: 
- - For "multiple choice", embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
+ - For "multiple choice", each question must embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
  - For "true/false", format like: "The sky is green. True or False" 
  - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." 
 
  Final Output Format: 
  - Output must be a pure JSON array of strings. 
- Example: ["Question 1", "Question 2"] 
- - Do not wrap the array in markdown (no \`\`\`json or \`\`\`). Return ONLY the array.`
+ Example: 
+ [ 
+   "Question 1", 
+   "Question 2", 
+   ... 
+ ] 
+
+ Do not wrap the array in markdown (no \`\`\`json or \`\`\`). 
+ Return ONLY the array and nothing else. 
+
+ Thank you! <3`
                 }
             ];
         }
- const { text: questions } = await generateText({
+        const { text: questions } = await generateText({
             model: google('gemini-1.5-flash-latest'),
             messages: promptContent,
         });
