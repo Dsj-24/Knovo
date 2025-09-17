@@ -4,6 +4,8 @@ import { feedbackSchema } from "@/constants";
 import { db } from "@/firebase/admin";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
+import * as admin from "firebase-admin";
+
 
 export async function getQuizzesByUserId(
     userId: string
@@ -171,26 +173,100 @@ export async function getFeedbackByQuizId(
 export async function getBestFeedbackByUserId(
   params: GetFeedbackByQuizIdParams
 ): Promise<Feedback | null> {
-  const { quizId, userId } = params;
+const { quizId, userId } = params;
+  if (!quizId || !userId) return null;
 
-  const querySnapshot = await db
+  // Ensure totalScore is indexed for orderBy in Firestore console
+  const qSnap = await db
     .collection("feedback")
     .where("quizId", "==", quizId)
     .where("userId", "==", userId)
+    .orderBy("totalScore", "desc")
+    .limit(1)
     .get();
 
-  if (querySnapshot.empty) return null;    
+  if (qSnap.empty) return null;
 
- // 2. Map all documents to an array of Feedback objects
-  const allFeedback = querySnapshot.docs.map(doc => {
-    return { id: doc.id, ...doc.data() } as Feedback;
+  const doc = qSnap.docs[0];
+  const data = doc.data() as any;
+
+  // Defensive: parse/convert totalScore to number
+  const totalScore = typeof data.totalScore === "number"
+    ? data.totalScore
+    : Number(data.totalScore) || 0;
+
+  return {
+    id: doc.id,
+    ...data,
+    totalScore
+  } as Feedback;
+}
+
+export async function getHighScoresWithUsers(): Promise<QuizWithTop[]> {
+  // 1) Fetch all finalized quizzes
+  const quizzesSnap = await db
+    .collection("quizzes")
+    .where("finalized", "==", true)
+    .get();
+
+  const quizzes: Quiz[] = quizzesSnap.docs.map(
+    (doc) => ({ id: doc.id, ...doc.data() } as Quiz)
+  );
+
+  if (quizzes.length === 0) return [];
+
+  // 2) Fetch top 3 feedbacks for each quiz
+  const feedbackPromises = quizzes.map((quiz) =>
+    db
+      .collection("feedback")
+      .where("quizId", "==", quiz.id)
+      .orderBy("totalScore", "desc")
+      .limit(3)
+      .get()
+  );
+
+  const feedbackSnaps = await Promise.all(feedbackPromises);
+
+  const quizzesWithFeedbacks = quizzes.map((quiz, idx) => {
+    const feedbacks: Feedback[] = feedbackSnaps[idx].docs.map(
+      (doc) => ({ id: doc.id, ...doc.data() } as Feedback)
+    );
+    return { ...quiz, topFeedbacks: feedbacks };
   });
 
-  // 3. Use .reduce() to find the one with the highest totalScore
-  const highestScoreFeedback = allFeedback.reduce((max, current) => {
-    // If the current feedback's score is higher than the max we've seen so far, it becomes the new max
-    return current.totalScore > max.totalScore ? current : max;
+  // 3) Collect all userIds from top feedbacks
+  const userIds = new Set<string>();
+  quizzesWithFeedbacks.forEach((quiz) => {
+    quiz.topFeedbacks.forEach((fb) => userIds.add(fb.userId));
   });
 
-  return highestScoreFeedback;
+  const uniqueUserIds = Array.from(userIds);
+
+  // 4) Fetch users in batches (Firestore "in" supports max 10 at a time)
+  const usersMap: Record<string, User> = {};
+  const chunkSize = 10;
+  for (let i = 0; i < uniqueUserIds.length; i += chunkSize) {
+    const chunk = uniqueUserIds.slice(i, i + chunkSize);
+    const usersSnap = await db
+      .collection("users")
+      .where(admin.firestore.FieldPath.documentId(), "in", chunk)
+      .get();
+    usersSnap.forEach((doc) => {
+      usersMap[doc.id] = doc.data() as User;
+    });
+  }
+
+  // 5) Map feedback to user names
+  const final: QuizWithTop[] = quizzesWithFeedbacks.map((quiz) => ({
+    quizId: quiz.id,
+    topic: quiz.topic,
+    type: quiz.type,
+    topScorers: quiz.topFeedbacks.map((fb) => ({
+      score: fb.totalScore,
+      userId: fb.userId,
+      name: usersMap[fb.userId]?.name || "Unknown User",
+    })),
+  }));
+
+  return final;
 }

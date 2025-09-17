@@ -2,6 +2,7 @@ type FormType = "sign-in" | "sign-up";
 
 interface QuizCardProps {
   id?: string;
+  viewerId?: string; 
   userId?: string;
   topic: string;
   type: string;
@@ -80,6 +81,7 @@ interface RouteParams {
 interface Feedback {
   id: string;
   quizId: string;
+  userId: string;
   totalScore: number;
   categoryScores: Array<{
     name: string;
@@ -111,3 +113,14 @@ interface GetLatestQuizzesParams {
   limit?: number;
 }
 
+interface QuizWithTop {
+  quizId: string;
+  topic: string;
+  type: string;
+  topScorers: { name: string; score: number; userId: string }[];
+}
+
+interface User {
+  name: string;
+  email: string;
+}

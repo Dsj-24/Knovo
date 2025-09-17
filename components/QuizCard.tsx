@@ -8,37 +8,37 @@ import { getBestFeedbackByUserId } from '@/lib/actions/general.action'; // Your 
 
 // --- Loading Components (no changes) ---
 const LoadingSpinner = () => (
-  <div className="relative flex items-center justify-center">
-    {/* Outer rotating ring with gradient effect */}
-    <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600"></div>
+    <div className="relative flex items-center justify-center">
+        {/* Outer rotating ring with gradient effect */}
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600"></div>
 
-    {/* Inner pulsing dot for extra visual appeal */}
-    <div className="absolute animate-pulse rounded-full h-2 w-2 bg-blue-600"></div>
-  </div>
+        {/* Inner pulsing dot for extra visual appeal */}
+        <div className="absolute animate-pulse rounded-full h-2 w-2 bg-blue-600"></div>
+    </div>
 )
 
 // Enhanced Loading Overlay with smoother animations
 const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
-  if (!isLoading) return null;
+    if (!isLoading) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
-        <LoadingSpinner />
-        
-        <div className="text-center">
-          <p className="text-gray-700 font-semibold text-lg mb-2">{message}</p>
-          
-          {/* Animated dots below the message */}
-          <div className="flex justify-center space-x-1">
-            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce"></div>
-          </div>
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+            <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
+                <LoadingSpinner />
+
+                <div className="text-center">
+                    <p className="text-gray-700 font-semibold text-lg mb-2">{message}</p>
+
+                    {/* Animated dots below the message */}
+                    <div className="flex justify-center space-x-1">
+                        <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }
 
 
@@ -47,18 +47,19 @@ interface Feedback {
     totalScore: number;
 }
 
-const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
+const QuizCard = ({ id, viewerId, userId, topic, type, createdAt }: QuizCardProps) => {
     const [feedback, setFeedback] = useState<Feedback | null>(null);
     const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
         const fetchFeedback = async () => {
-            if (!userId || !id) {
+            if (!viewerId || !id) {
                 setIsFetching(false);
                 return;
             }
             try {
-                const result = await getBestFeedbackByUserId({ userId: userId, quizId: id });
+                console.log({ quizId: id, userId: viewerId })
+                const result = await getBestFeedbackByUserId({ userId: viewerId, quizId: id });
                 setFeedback(result);
             } catch (error) {
                 console.error("Failed to fetch feedback:", error);
@@ -69,7 +70,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
         };
 
         fetchFeedback();
-    }, [id, userId]);
+    }, [id, viewerId]);
 
     const normalizedType = /random/gi.test(type) ? "Random" : type;
     const formattedDate = dayjs(createdAt || Date.now()).format("MMM D, YYYY");
@@ -110,7 +111,7 @@ const QuizCard = ({ id, userId, topic, type, createdAt }: QuizCardProps) => {
                                     : "You haven't taken this quiz."
                             }
                         </p>
-                        
+
                     </div>
                     <div className="flex flex-row justify-between pt-10">
                         <Button className="btn-primary text-lg p-6" onClick={() => setIsLoading(true)}>
