@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,32 @@ import { Crown, Sparkles, Star, Trophy, Zap } from 'lucide-react';
 //https://knovo-dhlb.vercel.app/quiz/leaderboard
 //https://knovo-dhlb.vercel.app/quiz/multiplayer
 
+const LoadingSpinner = () => (
+  <div className="relative flex items-center justify-center">
+    <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600"></div>
+    <div className="absolute animate-pulse rounded-full h-2 w-2 bg-blue-600"></div>
+  </div>
+)
+
+const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
+  if (!isLoading) return null;
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
+        <LoadingSpinner />
+        <div className="text-center">
+          <p className="text-gray-700 font-semibold text-lg mb-2">{message}</p>
+          <div className="flex justify-center space-x-1">
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const Home = async () => {
 
   const user = await getCurrentUser();
@@ -20,6 +47,8 @@ const Home = async () => {
     await getLatestQuizzes({ userId: user?.id! }),
 
   ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isStarting, setIsStarting] = useState(false);
 
   const hasPastQuizzes = userQuizzes?.length! > 0;
   //@ts-ignore
@@ -27,6 +56,8 @@ const Home = async () => {
 
   return (
     <>
+    <LoadingOverlay isLoading={isLoading} message="Loading Challenge Mode" />
+    <LoadingOverlay isLoading={isStarting} message="Loading Leaderboard" />
 
 {/* Hero Banner */}
       <div className="relative bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 rounded-3xl mb-12 overflow-hidden shadow-2xl border border-purple-500/20 p-28">
@@ -88,7 +119,7 @@ const Home = async () => {
 
       <div className='grid grid-cols-2 gap-8 max-sm:grid-cols-1 mb-8'>
 
-        <Link href="https://knovo-dhlb.vercel.app/leaderboard">
+        <Link href="https://knovo-dhlb.vercel.app/leaderboard" onClick={() => setIsStarting(true)}>
           {/* Leaderboards Box */}
           <div className='relative bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-600 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-purple-400/30'>
             {/* Background decorative elements */}
@@ -114,7 +145,7 @@ const Home = async () => {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
           </div>
   </Link>
-          <Link href="https://knovo-dhlb.vercel.app/multiplayer">
+          <Link href="https://knovo-dhlb.vercel.app/multiplayer" onClick={() => setIsLoading(true)}>
           {/* Buzz Rush Box */}
           <div className='relative bg-gradient-to-tr from-yellow-400 via-orange-400 to-orange-500 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-yellow-400/30'>
             {/* Background decorative elements */}

@@ -8,6 +8,7 @@ import { Zap } from "lucide-react";
 /**
  * Minimal "Call" page that starts the Misc workflow and shows live transcripts.
  * (Does NOT use Agent component.)
+ * 
  */
 export default function MiscWorkflowStandalonePage() {
   const workflowId = process.env.NEXT_PUBLIC_VAPI_MISCELLANEOUS_ID;
@@ -97,6 +98,8 @@ export default function MiscWorkflowStandalonePage() {
   };
 
   return (
+    
+    
     <div className="w-full mx-auto p-4 sm:p-6 md:p-8 bg-blue-900 min-h-fit rounded-2xl sm:rounded-3xl">
       {/* Enhanced Challenge Mode Card with Sea Blue Gradient */}
       <div className="bg-gradient-to-br from-cyan-600 via-blue-600 to-teal-700 rounded-2xl sm:rounded-3xl border-2 border-cyan-400/30 p-6 sm:p-10 md:p-12 text-center mb-8 sm:mb-10 shadow-2xl">
