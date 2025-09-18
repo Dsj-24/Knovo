@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button";
@@ -20,8 +19,6 @@ const Home = async () => {
     await getLatestQuizzes({ userId: user?.id! }),
 
   ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isStarting, setIsStarting] = useState(false);
 
   const hasPastQuizzes = userQuizzes?.length! > 0;
   //@ts-ignore
