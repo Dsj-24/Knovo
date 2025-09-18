@@ -203,8 +203,9 @@ useEffect(() => {
                     <h3 className="bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent font-bold">KNOVO AI</h3>
                 </div>
                 
-                {/* User Profile Card with gradient styling */}           
-                    <div className="card-content bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 rounded-3xl mb-8 overflow-hidden shadow-2xl border border-purple-500/20 p-28">
+                {/* User Profile Card with gradient styling */}
+                <div className="card-border rounded-4xl bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 border-purple-400/30 mb-2">
+                    <div className="card-content bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 rounded-3xl mb-12 overflow-hidden shadow-2xl border border-purple-500/20 p-28">
                         <div className="relative">
                             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-20 blur"></div>
                             <Image
@@ -218,6 +219,7 @@ useEffect(() => {
                         <h3 className="text-white font-semibold">{userName}</h3>
                     </div>
                 </div>
+            </div>
 
             {/* Transcript Section - Reduced margin */}
             <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-2xl border-2 border-purple-500/30 shadow-2xl overflow-hidden mb-6">
