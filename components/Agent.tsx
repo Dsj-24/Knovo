@@ -203,7 +203,7 @@ useEffect(() => {
                 </div>
                 
                 {/* User Profile Card with gradient styling */}
-                <div className="card-border rounded-4xl bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 mb-12 overflow-hidden shadow-2xl border border-purple-500/20 p-28">
+                <div className="card-border rounded-4xl bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 border-2 border-purple-400/30">
                     <div className="card-content bg-gradient-to-br from-slate-800 via-purple-900 to-indigo-900 rounded-3xl mb-12 overflow-hidden shadow-2xl border border-purple-500/20 p-28">
                         <div className="relative">
                             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-20 blur"></div>
