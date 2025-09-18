@@ -44,7 +44,7 @@ const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: s
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn w-full">
       <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
         <LoadingSpinner />
         

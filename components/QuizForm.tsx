@@ -144,13 +144,13 @@ const QuizForm = ({ userId }: QuizFormProps) => {
     }
 
     return (
-        <div className="card-border lg:min-w-[546px]">
+        <div className="card-border lg:min-w-[546px] w-full max-w-5xl">
             <div className="flex flex-col gap-6 card py-14 px-10">
                 <div className="flex flex-row gap-2 justify-center items-center">
                     <Image src="/logo.svg" alt="logo" width={34} height={60} />
                     <h2 className="text-primary-100">KNOVO</h2>
                 </div>
-                <h2 className="text-center">Generate Your Personalized Quiz</h2>
+                <h2 className="text-center text-4xl">Generate Your Personalized Quiz</h2>
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
@@ -159,12 +159,13 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                             name="topic"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-xl">Quiz Topic</FormLabel>
+                                    <FormLabel className="text-2xl">Quiz Topic</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Enter topic (e.g., Science, History)"
                                             {...field}
                                             onChange={handleTopicChange}
+                                            className="lg:text-xl p-6"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -173,18 +174,18 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                         />
 
                         <div className="text-center my-2">
-                            <h3 className="text-gray-300">OR</h3>
+                            <h2 className="text-gray-300">OR</h2>
                         </div>
 
                         {/* ADDED mb-4 FOR SPACING */}
                         <FormItem className="mb-4">
-                            <FormLabel className="text-xl">Upload a PDF</FormLabel>
+                            <FormLabel className="text-2xl">Upload a PDF</FormLabel>
                             <FormControl>
                                 <Input
                                     id="pdf-upload"
                                     type="file"
                                     accept=".pdf"
-                                    className="pb-2.5 pt-2 text-gray-400 file:mr-4 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-200 file:text-dark-100 hover:file:bg-primary-200/80 h-full"
+                                    className="pb-3.5 pt-3 text-gray-400 text-xl file:mr-4 file:px-4 file:rounded-full file:border-0 file:text-xl file:font-semibold file:bg-primary-200 file:text-dark-100 hover:file:bg-primary-200/80 h-full"
                                     onChange={handleFileChange}
                                 />
                             </FormControl>
@@ -202,7 +203,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
                                 <FormItem>
 
-                                    <FormLabel className="text-xl" >Quiz Type</FormLabel>
+                                    <FormLabel className="text-2xl" >Quiz Type</FormLabel>
 
                                     <FormControl>
 
@@ -210,7 +211,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
                                             {...field}
 
-                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            className="flex h-13 text-xl w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 
                                         >
 
@@ -246,7 +247,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
                                 <FormItem>
 
-                                    <FormLabel className="text-xl">Difficulty Level</FormLabel>
+                                    <FormLabel className="text-2xl">Difficulty Level</FormLabel>
 
                                     <FormControl>
 
@@ -254,11 +255,11 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
                                             {...field}
 
-                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            className="flex h-13 text-xl w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-lg file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 
                                         >
 
-                                            <option value="">Select difficulty</option>
+                                            <option value="" >Select difficulty</option>
 
                                             <option value="easy">Easy</option>
 
@@ -283,7 +284,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                             name="amount"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-xl" >Number of Questions</FormLabel>
+                                    <FormLabel className="text-2xl" >Number of Questions</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
@@ -291,6 +292,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                                             min="1"
                                             max="20"
                                             {...field}
+                                            className="h-13 text-2xl"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -299,7 +301,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                         />
 
                         <Button
-                            className="btn w-full h-12 text-xl mt-2"
+                            className="btn w-full h-15 text-3xl mt-2"
                             type="submit"
                             disabled={isLoading}
                         >

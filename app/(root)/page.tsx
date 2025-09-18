@@ -9,6 +9,9 @@ import { getCurrentUser } from '@/lib/actions/auth.action';
 import { getLatestQuizzes, getQuizzesByUserId, getFeedbackByQuizId } from '@/lib/actions/general.action';
 import { Crown, Sparkles, Star, Trophy, Zap } from 'lucide-react';
 
+//https://knovo-dhlb.vercel.app/quiz/leaderboard
+//https://knovo-dhlb.vercel.app/quiz/multiplayer
+
 const Home = async () => {
 
   const user = await getCurrentUser();
@@ -64,7 +67,7 @@ const Home = async () => {
           
           {/* Subtitle */}
           <div className="max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl text-gray-300 font-medium leading-relaxed text-center">
+            <p className="text-2xl md:text-xl text-gray-300 font-medium leading-relaxed text-center">
               Create personalised oral quizzes and compete with friends
             </p>
           </div>
@@ -81,11 +84,11 @@ const Home = async () => {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 via-transparent to-indigo-600/5 rounded-3xl"></div>
       </div>
 
-      <h2>Compete with your Friends !</h2>
+      <h2>Compete with your Friends and give Adaptive Difficulty Challenges!</h2>
 
       <div className='grid grid-cols-2 gap-8 max-sm:grid-cols-1 mb-8'>
 
-        <Link href="/leaderboard">
+        <Link href="https://knovo-dhlb.vercel.app/quiz/leaderboard">
           {/* Leaderboards Box */}
           <div className='relative bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-600 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-purple-400/30'>
             {/* Background decorative elements */}
@@ -111,7 +114,7 @@ const Home = async () => {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
           </div>
   </Link>
-          <Link href="http://localhost:3000/multiplayer">
+          <Link href="https://knovo-dhlb.vercel.app/quiz/multiplayer">
           {/* Buzz Rush Box */}
           <div className='relative bg-gradient-to-tr from-yellow-400 via-orange-400 to-orange-500 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-yellow-400/30'>
             {/* Background decorative elements */}
@@ -137,7 +140,7 @@ const Home = async () => {
                 <Sparkles className="w-5 h-5 text-white/80 absolute -top-1 -right-1 z-10 group-hover:rotate-180 transition-transform duration-500" />
               </div>
               <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-orange-100 bg-clip-text text-transparent">
-                Buzz Rush
+                Challenge Mode
               </h3>
             </div>
             
@@ -147,22 +150,22 @@ const Home = async () => {
           </Link>
         </div>
 
-      <section className="card-cta">
-        <div className="flex flex-col gap-6 max-w-lg">
-          <h2>
-            Test your knowledge with AI powered Practice & Feedback.
+      <section className="card-cta bg-gradient-to-br from-slate-800 via-purple-950 to-indigo-950 rounded-3xl mb-12 overflow-hidden shadow-2xl border border-purple-500/20">
+        <div className="flex flex-col gap-6 max-w-3xl">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Test your knowledge and vocal abilities with AI powered Practice & Feedback.
           </h2>
-          <p className="text-lg">
-            Practice any type of questions and get instant feedback on Knowledge and Vocal abilities.
+          <p className="text-2xl">
+            Practice as many questions on any topic , any format , any difficulty level and get instant feedback on knowledge and vocal abilities.
           </p>
 
-          <Button asChild className="btn-primary max-sm:w-full p-6 text-xl mt-2">
+          <Button asChild className="btn-primary max-sm:w-full p-10 text-3xl mt-4">
             <Link href="/quiz">Create A Quiz</Link>
           </Button>
 
         </div>
 
-        <Image src="/robot.png" alt="robot" width={400} height={300} className="max-sm:hidden" />
+        <Image src="/robot.png" alt="robot" width={450} height={300} className="max-sm:hidden" />
 
       </section>
 

@@ -7,7 +7,7 @@ export default async function Leaderboard() {
     data.filter((q) => q.type === type);
  
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 w-full mx-auto">
       <div className="mb-12 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-8 rounded-3xl shadow-2xl border-4 border-yellow-300">
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
