@@ -88,7 +88,7 @@ const Home = async () => {
 
       <div className='grid grid-cols-2 gap-8 max-sm:grid-cols-1 mb-8'>
 
-        <Link href="https://knovo-dhlb.vercel.app/quiz/leaderboard">
+        <Link href="https://knovo-dhlb.vercel.app/leaderboard">
           {/* Leaderboards Box */}
           <div className='relative bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-600 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-purple-400/30'>
             {/* Background decorative elements */}
@@ -114,7 +114,7 @@ const Home = async () => {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
           </div>
   </Link>
-          <Link href="https://knovo-dhlb.vercel.app/quiz/multiplayer">
+          <Link href="https://knovo-dhlb.vercel.app/multiplayer">
           {/* Buzz Rush Box */}
           <div className='relative bg-gradient-to-tr from-yellow-400 via-orange-400 to-orange-500 rounded-2xl p-12 text-white flex flex-col items-center justify-center gap-4 text-center overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer shadow-2xl border border-yellow-400/30'>
             {/* Background decorative elements */}
