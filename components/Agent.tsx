@@ -60,7 +60,6 @@ const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId
     const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
     const [messages, setMessages] = useState<SavedMessage[]>([]);
     const [isSpeaking, setIsSpeaking] = useState(false);
-    const [lastMessage, setLastMessage] = useState<string>("");
     const [isGeneratingFeedback, setIsGeneratingFeedback] = useState(false);
 
     useEffect(() => {
@@ -112,7 +111,7 @@ const Agent = ({ userName, userId, type, questions, quizId, quizType, feedbackId
 
 useEffect(() => {
         if (messages.length > 0) {
-            setLastMessage(messages[messages.length - 1].content);
+           console.log("New message:", messages[messages.length - 1]);
         }
 
         const handleGenerateFeedback = async (messages: SavedMessage[]) => {
