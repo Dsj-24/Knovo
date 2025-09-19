@@ -34,16 +34,12 @@ const LoadingSpinner = () => (
 // Enhanced Loading Overlay with gradient theme - FULL SCREEN
 const LoadingOverlay = ({ isLoading, message }: { isLoading: boolean; message: string }) => {
   if (!isLoading) return null;
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
       <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-6 shadow-2xl border border-gray-100 animate-slideIn">
         <LoadingSpinner />
-        
         <div className="text-center">
           <p className="text-gray-700 font-semibold text-lg mb-2">{message}</p>
-          
-          {/* Animated dots below the message */}
           <div className="flex justify-center space-x-1">
             <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
             <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -264,14 +260,14 @@ useEffect(() => {
                                 <p className="text-purple-300 text-sm mt-2">Start a call to see live transcription</p>
                             </div>
                         ) : (
-                            <div className="space-y-3">
+                            <div className="space-y-3 flex flex-col w-full">
                                 {messages.map((m, i) => (
                                     <div
                                         key={`m-${i}`}
-                                        className={`p-4 rounded-xl ${
+                                        className={`p-4 rounded-xl max-w-fit ${
                                             m.role === 'user'
-                                                ? 'bg-blue-500/10 border-l-4 border-blue-400 ml-6'
-                                                : 'bg-purple-500/10 border-l-4 border-purple-400 mr-6'
+                                                ? 'bg-blue-500/10 border-l-4 border-blue-400 ml-6 self-end'
+                                                : 'bg-purple-500/10 border-l-4 border-purple-400 mr-6 self-start'
                                         }`}
                                     >
                                         <div
@@ -309,7 +305,7 @@ useEffect(() => {
                 ) : (
                     <button className="relative group p-4 w-44" onClick={handleDisconnect}>
                         <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-200"></div>
-                        <div className="relative bg-gradient-to-r from-red-800 to-pink-800 rounded-xl px-8 py-4 border border-red-400/30 shadow-lg transition-all duration-200 hover:shadow-xl">
+                        <div className="relative bg-gradient-to-r from-red-800 to-pink-800 rounded-xl px-8 py-4 border border-red-400/30 shadow-lg transition-all duration-200 hover:shadow-lg">
                             <span className="text-white text-2xl font-semibold">End</span>
                         </div>
                     </button>

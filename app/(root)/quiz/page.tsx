@@ -22,7 +22,7 @@ const QuizPage = () => {
             <div>
                 <button
                     onClick={() => setShowQuizForm(false)}
-                    className="mb-4 px-4 py-2 bg-[#530558] rounded-2xl hover:bg-gray-600 transition-colors"
+                    className="mb-4 px-4 py-2 bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 rounded-2xl hover:bg-gray-600 transition-colors"
                 >
                     <h2 className='rounded-full text-white font-semibold'>
                         ← Choose
@@ -32,7 +32,7 @@ const QuizPage = () => {
          <div className='flex flex-col items-center justify-center gap-8 p-4'>
                     <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 p-1 rounded-3xl shadow-2xl mb-4">
                         <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 px-20 py-6 rounded-3xl">
-                            <h2 className='text-center text-4xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent'>
+                            <h2 className='text-center text-2xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent'>
                                 QUIZ GENERATION
                             </h2>
                         </div>

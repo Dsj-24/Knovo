@@ -153,7 +153,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                 <h2 className="text-center text-4xl">Generate Your Personalized Quiz</h2>
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 mb-4 form">
                         <FormField
                             control={form.control}
                             name="topic"
@@ -165,7 +165,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                                             placeholder="Enter topic (e.g., Science, History)"
                                             {...field}
                                             onChange={handleTopicChange}
-                                            className="lg:text-xl p-6"
+                                            className="lg:text-xl p-6 mb-3"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -174,11 +174,11 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                         />
 
                         <div className="text-center my-2">
-                            <h2 className="text-gray-300">OR</h2>
+                            <h2 className="text-gray-300 text-xl md:text-2xl mb-3 mt-3">OR</h2>
                         </div>
 
                         {/* ADDED mb-4 FOR SPACING */}
-                        <FormItem className="mb-4">
+                        <FormItem className="mb-10">
                             <FormLabel className="text-2xl">Upload a PDF</FormLabel>
                             <FormControl>
                                 <Input
@@ -255,7 +255,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
                                             {...field}
 
-                                            className="flex h-13 text-xl w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-lg file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            className="flex h-13 text-xl w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-lg file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 
                                         >
 
@@ -292,7 +292,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
                                             min="1"
                                             max="20"
                                             {...field}
-                                            className="h-13 text-2xl"
+                                            className="h-13 text-2xl mb-6"
                                         />
                                     </FormControl>
                                     <FormMessage />

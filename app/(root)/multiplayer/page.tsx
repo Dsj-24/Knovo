@@ -11,7 +11,7 @@ import { Zap } from "lucide-react";
  * 
  */
 export default function MiscWorkflowStandalonePage() {
-  const workflowId = process.env.NEXT_PUBLIC_VAPI_MISCELLANEOUS_ID;
+  const workflowId = process.env.NEXT_PUBLIC_VAPI_MISCELLANEOUS_ID!;
   const [running, setRunning] = useState(false);
   const [starting, setStarting] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);

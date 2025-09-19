@@ -28,18 +28,25 @@ export const QuizMaster: CreateAssistantDTO = {
   name: "Knovo QuizMaster",
   firstMessage:
     "Hello! Welcome to Knovo! Let's begin your personalised quiz now. I'll read out each question in a sequence. Just speak your answer after I ask a question. Say Okay If you are ready to start.",
-  transcriber: {
-    provider: "deepgram",
-    model: "nova-2",
+ transcriber: {
+ provider: "11labs",
+    model: "scribe_v1",
     language: "en",
-    smartFormat: true,   // Enables punctuation and capitalization
-    numerals: true,       // Converts spoken numbers to digits
-    endpointing: 200      // Waits for 200ms of silence before finalizing
+
+  // Keep model improvement enabled for better performance over time  
   },
- voice: {
-    provider: "deepgram",
-    model: "aura",
-    voiceId: "luna",
+
+  voice: {
+    provider: "11labs",
+    voiceId: "marissa",
+    model: "eleven_multilingual_v2",
+    stability: 0.5,
+    similarityBoost: 0.75,
+    speed: 1.1,
+    enableSsmlParsing: false,
+    optimizeStreamingLatency: 4,
+    useSpeakerBoost: true,
+    // cachingEnabled: true,
   },
   model: {
     provider: "openai",

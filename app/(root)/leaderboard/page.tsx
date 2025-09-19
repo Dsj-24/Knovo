@@ -11,7 +11,7 @@ export default async function Leaderboard() {
       <div className="mb-12 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-8 rounded-3xl shadow-2xl border-4 border-yellow-300">
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <h1 className="text-6xl font-black text-white drop-shadow-2xl">
+            <h1 className="md:text-6xl text-4xl font-black text-white drop-shadow-2xl">
               Leaderboard
             </h1>
           </div>
