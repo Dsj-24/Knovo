@@ -70,6 +70,7 @@ ${formattedTranscript}
 **1. Scoring:**
    - The total score for the quiz is 100.
    - The score must be divided equally among all questions present in the transcript.
+   - All individual category scores (e.g., Accuracy, Speed, etc.) must be independently calculated and presented on a scale of 0 to 100.
 
 **2. Evaluation Criteria (Based on Quiz Type):**
    - **For "True/False" or "Multiple Choice" Quizzes:**
