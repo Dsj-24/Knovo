@@ -4,7 +4,6 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
-
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -142,11 +141,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
     <div className="card-border lg:min-w-[546px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center items-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
-          <h1 className="text-primary-100">KNOVO</h1>
+        <div className="flex flex-row gap-2 justify-center items-center mb-4">
+          <Image src="/logo.svg" alt="logo" height={35} width={38} />
+          <p className="text-5xl font-bold">KNOVO</p>
         </div>
-        <h2 className="text-center">Practice Personalized quizzes with AI</h2>
+        <h2 className="text-center text-2xl md:text-3xl">Practice Personalized quizzes with AI</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
             {!isSignIn && (<FormField
@@ -175,7 +174,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 <div className="flex justify-end -mt-4">
                   <p
                     onClick={() => setForgotPasswordOpen(true)}
-                    className="text-sm font-medium text-user-primary hover:underline cursor-pointer"
+                    className="text-sm font-medium text-user-primary hover:underline cursor-pointer p-1"
                   >
                     Forgot Password?
                   </p>
@@ -184,12 +183,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
               {/* --- END OF ADDITION --- */}
 
               
-            <Button className="btn text-xl" type="submit">{isSignIn ? 'Sign In' : 'Create Account'}</Button>
+            <Button className="btn text-2xl my-2" type="submit">{isSignIn ? 'Sign In' : 'Create Account'}</Button>
           </form>
         </Form>
 
-        <p className="text-center text-xl">{isSignIn ? 'No account yet' : 'Have an account already?'}
-          <Link href={!isSignIn ? '/sign-in' : '/sign-up'} className="font-bold text-user-primary ml-1">{!isSignIn ? "Sign In" : "Sign Up"}</Link>
+        <p className="text-center text-xl">{isSignIn ? 'No account yet :' : 'Have an account already?'}
+          <Link href={!isSignIn ? '/sign-in' : '/sign-up'} className="font-bold text-user-primary ml-3">{!isSignIn ? "Sign In" : "Sign Up"}</Link>
         </p>
       </div></div></>
   )
