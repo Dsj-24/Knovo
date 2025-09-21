@@ -96,7 +96,7 @@ IMPORTANT RULES:
  - Format: ${type} (must be one of: "true/false", "multiple choice", or "verbal answer") 
 
  IMPORTANT RULES: 
- - ONLY generate questions in the specified format: "${type}". 
+ - ONLY generate questions in the specified format: "${type}" and of no other format mandatorily. 
  - Do NOT mix formats. All questions must follow "${type}" strictly. 
  - Do NOT include answers or explanations. 
  - Do NOT include extra text before or after the list. 
@@ -105,7 +105,7 @@ IMPORTANT RULES:
  Format Requirements: 
  - For "multiple choice", each question must embed options like: "What is the capital of France? (A) Berlin (B) Madrid (C) Paris (D) Rome" 
  - For "true/false", format like: "The sky is green. True or False" 
- - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." 
+ - For "verbal answer", format like: "Explain the importance of biodiversity in ecosystems." If the requested ${type} is "verbal answer", you MUST convert any multiple-choice or true/false questions found in the source material into an open-ended verbal question. For example, if the source contains "Which Agile framework uses Kanban boards? (A) Scrum (B) Kanban", you must rephrase it to something like "Describe the Agile framework that emphasizes the use of Kanban boards." Do NOT output the question in its original multiple-choice or true/false format. 
 
  Final Output Format: 
  - Output must be a pure JSON array of strings. 
