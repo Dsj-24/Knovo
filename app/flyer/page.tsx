@@ -131,7 +131,7 @@ export default function KnovoLandingPage() {
         {/* Header - Knowledge + Voice = KNOVO */}
         <div className="text-center mb-8 md:mb-12 mt-8">
           <div className="space-y-4 md:space-y-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
               <span className="inline-block">
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
                   Knowledge
@@ -149,7 +149,7 @@ export default function KnovoLandingPage() {
               </span>
             </h1>
             
-            <p className="text-lg md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-2xl text-gray-400 font-medium max-w-3xl mx-auto leading-relaxed">
               AI-powered voice based Quiz Platform
             </p>
             
