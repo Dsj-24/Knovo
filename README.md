@@ -1,4 +1,4 @@
-# 🚀 KNOVO – Knowledge + Voice = AI-powered Quiz Platform  
+# 🚀 KNOVO = Knowledge + Voice - AI-powered Quiz Platform  
 
 AI-powered voice-based quiz platform for interactive, adaptive learning and competitions.  
 
