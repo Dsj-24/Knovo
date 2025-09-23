@@ -1,40 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 KNOVO – Knowledge + Voice = AI-powered Quiz Platform  
 
-## Getting Started
+AI-powered voice-based quiz platform for interactive, adaptive learning and competitions.  
 
-First, run the development server:
+Built for the **Prism GenAI Hackathon 2025 – Round 2**.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌟 Overview  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Knovo transforms learning into an interactive voice-driven quiz experience.  
+Users can take personalized oral quizzes, receive real-time feedback, and compete in adaptive challenge modes powered by multimodal AI.  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎯 Key Features  
 
-To learn more about Next.js, take a look at the following resources:
+- 🎤 **Voice-based Quizzing** – Speak your answers, get instant responses.  
+- 🧠 **Adaptive Difficulty** – Questions adjust dynamically based on performance.  
+- 👥 **Multiplayer & Leaderboards** – Compete with friends or peers.  
+- 🔄 **Daily Challenges** – Curated questions to keep users engaged.  
+- 📊 **Feedback & Analytics** – AI evaluates both knowledge and vocal delivery.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 👥 Stakeholders  
 
-## Deploy on Vercel
+- **Students & Learners** → Engage with interactive, adaptive quizzes.  
+- **Educators & Institutions** → A tool to gamify learning and track progress.  
+- **Peers/Communities** → Compete, collaborate, and improve together.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-# Introduction
+## 🛠️ Tech Stack  
 
-🚀 KNOVO – Knowledge + Voice = AI-powered Quiz Platform
+- **Frontend**: Next.js + TailwindCSS  
+- **Backend**: Node.js + Firebase  
+- **AI/Voice**: Vapi SDK + Deepgram ASR + LLM (OpenAI/Anthropic)  
+- **Storage & Hosting**: Firebase + Vercel  
+- **Version Control**: GitHub  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ⚙️ Architecture  
+
+*(Add diagram here in your repo — from your PDF/PPT)*  
+
+---
+
+## 📌 How It Works  
+
+1. User joins and selects a quiz/challenge.  
+2. Voice-based Q&A through Vapi workflows.  
+3. Adaptive Engine adjusts difficulty after first 5 questions.  
+4. Feedback module evaluates accuracy and vocal clarity.  
+5. Leaderboard updates in real-time.  
+
+---
+
+## 🎥 Demo  
+
+- **Demo Video Link** → *(YouTube/Drive – public link)*  
+- **Live App** → *(Vercel Deployment URL)*  
+
+---
+
+## 📂 Submission Details  
+
+- **Team Name**: KNOVO  
+- **College**: [Your College Name]  
+- **Theme**: [Selected Theme]  
+- **Team Lead**: [Your Name]  
+
+---
+
+## ✅ Evaluation Highlights  
+
+- **Working Prototype** – Fully functional voice quiz system.  
+- **Technical Depth** – Multimodal AI with adaptive workflows.  
+- **UX** – Engaging, gamified quiz with smooth UI.  
+- **Relevance** – Reinventing learning with voice-driven AI.  
+- **Docs & Presentation** – Architecture, assumptions, and demo video provided.  
+
+---
