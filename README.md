@@ -1,9 +1,9 @@
 # 🚀 KNOVO = Knowledge + Voice - AI-powered Quiz Platform  
-![Knovo Logo](/demo.png)
+![Knovo Logo](./public/demo.png)
 AI-powered voice-based quiz platform for interactive, adaptive learning and competitions.  
 
 Built for the **Prism GenAI Hackathon 2025 – Round 2**.  
-![Prism](/prism_logo.png)
+![Prism](./public/prism_logo.png)
 
 ---
 
