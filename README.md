@@ -33,6 +33,7 @@ Users can take personalized oral quizzes, receive real-time feedback, and compet
 
 ## 🛠️ Tech Stack  
 
+<<<<<<< HEAD
 - **Frontend**: Next.js + TailwindCSS  
 - **Backend**: Node.js + Firebase  
 - **AI/Voice**: Vapi SDK + Deepgram ASR + LLM (OpenAI/Anthropic)  
@@ -82,3 +83,61 @@ Users can take personalized oral quizzes, receive real-time feedback, and compet
 - **Docs & Presentation** – Architecture, assumptions, and demo video provided.  
 
 ---
+=======
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# 🚀 Project Name
+
+_A catchy one-liner about your project goes here._
+
+---
+
+## 📖 About
+Brief description of what your project does and why it exists.  
+Example:  
+> Knovo is an AI-powered voice-based quiz platform that makes learning interactive and fun through real-time feedback and gamified challenges.  
+
+---
+
+## ✨ Features
+- 🎙️ Voice-based quizzes (MCQ, True/False, Short Answer)  
+- 📊 Instant feedback and scoring  
+- 🏆 Leaderboards & challenges  
+- 🌐 Multimodal experience (voice + text + visuals)  
+
+---
+
+## 📸 Demo
+(Add screenshots / gifs here)  
+![Demo Screenshot](link-to-image-or-gif)
+
+---
+
+## 🛠️ Tech Stack
+- **Frontend:** Next.js, React, TailwindCSS  
+- **Backend:** Firebase / Node.js  
+- **AI:** Vapi SDK, Deepgram, OpenAI  
+- **Database:** Firestore  
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+- Node.js >= 18  
+- npm / yarn / pnpm  
+
+### Installation
+```bash
+# Clone the repo
+git clone https://github.com/your-username/your-repo.git
+
+cd your-repo
+
+# Install dependencies
+npm install
+
+# Run the dev server
+npm run dev
+
+>>>>>>> 6c7314a (rm1)
