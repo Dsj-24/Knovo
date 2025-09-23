@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { vapi } from "@/lib/vapi.sdk"; // Assuming you have your Vapi SDK wrapper here
-import { Star, Sparkles, Trophy, Zap, Play, ArrowRight, Mic, MicOff } from "lucide-react";
+import { Star, Sparkles, Trophy, Zap, Play, ArrowRight, Mic, MicOff, Brain, BookOpen, Lightbulb, Target, Award, Rocket } from "lucide-react";
 import Image from "next/image";
 
 export default function KnovoLandingPage() {
@@ -116,22 +116,74 @@ export default function KnovoLandingPage() {
         <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      {/* Floating Icons */}
-      <div className="absolute top-8 right-12 opacity-30 animate-bounce">
-        <Star className="w-8 h-8 text-yellow-400" />
+      {/* Enhanced Floating Icons - More icons with mobile-friendly positioning */}
+      <div className="absolute top-8 right-8 sm:right-12 opacity-30 animate-bounce">
+        <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
       </div>
-      <div className="absolute bottom-12 right-16 opacity-25 animate-bounce" style={{ animationDelay: '1s' }}>
-        <Sparkles className="w-6 h-6 text-purple-400" />
+      <div className="absolute bottom-12 right-8 sm:right-16 opacity-25 animate-bounce" style={{ animationDelay: '1s' }}>
+        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
       </div>
-      <div className="absolute top-12 left-16 opacity-20 animate-bounce" style={{ animationDelay: '0.5s' }}>
-        <Trophy className="w-9 h-9 text-orange-400" />
+      <div className="absolute top-8 left-8 sm:left-16 opacity-20 animate-bounce" style={{ animationDelay: '0.5s' }}>
+        <Trophy className="w-7 h-7 sm:w-9 sm:h-9 text-orange-400" />
+      </div>
+      
+      {/* Additional floating icons - edge positioning */}
+      <div className="absolute top-1/4 right-4 sm:right-8 opacity-25 animate-bounce" style={{ animationDelay: '1.5s' }}>
+        <Brain className="w-5 h-5 sm:w-7 sm:h-7 text-cyan-400" />
+      </div>
+      <div className="absolute bottom-1/4 left-4 sm:left-8 opacity-20 animate-bounce" style={{ animationDelay: '2.5s' }}>
+        <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400" />
+      </div>
+      <div className="absolute top-2/3 right-12 sm:right-20 opacity-15 animate-bounce" style={{ animationDelay: '3s' }}>
+        <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300" />
+      </div>
+      <div className="absolute top-1/3 left-4 sm:left-12 opacity-30 animate-bounce" style={{ animationDelay: '0.8s' }}>
+        <Target className="w-4 h-4 sm:w-6 sm:h-6 text-pink-400" />
+      </div>
+      <div className="absolute bottom-1/3 right-6 sm:right-10 opacity-20 animate-bounce" style={{ animationDelay: '2.2s' }}>
+        <Award className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400" />
+      </div>
+      <div className="absolute top-1/2 right-2 sm:right-4 opacity-15 animate-bounce" style={{ animationDelay: '1.8s' }}>
+        <Rocket className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />
+      </div>
+
+      {/* Desktop-only icons around main UI */}
+      <div className="hidden lg:block absolute top-32 left-1/3 opacity-10 animate-bounce" style={{ animationDelay: '3.5s' }}>
+        <Zap className="w-5 h-5 text-blue-300" />
+      </div>
+      <div className="hidden lg:block absolute top-40 right-1/3 opacity-15 animate-bounce" style={{ animationDelay: '4s' }}>
+        <Star className="w-4 h-4 text-pink-300" />
+      </div>
+      <div className="hidden lg:block absolute bottom-32 left-1/4 opacity-10 animate-bounce" style={{ animationDelay: '4.5s' }}>
+        <Trophy className="w-6 h-6 text-amber-300" />
+      </div>
+      <div className="hidden lg:block absolute bottom-40 right-1/4 opacity-15 animate-bounce" style={{ animationDelay: '5s' }}>
+        <Brain className="w-5 h-5 text-teal-300" />
+      </div>
+      <div className="hidden lg:block absolute top-1/2 left-1/6 opacity-10 animate-bounce" style={{ animationDelay: '2.8s' }}>
+        <Lightbulb className="w-4 h-4 text-yellow-200" />
+      </div>
+      <div className="hidden lg:block absolute top-1/2 right-1/6 opacity-12 animate-bounce" style={{ animationDelay: '3.2s' }}>
+        <Sparkles className="w-5 h-5 text-purple-300" />
+      </div>
+      <div className="hidden lg:block absolute top-1/4 left-1/5 opacity-8 animate-bounce" style={{ animationDelay: '4.2s' }}>
+        <BookOpen className="w-4 h-4 text-emerald-300" />
+      </div>
+      <div className="hidden lg:block absolute bottom-1/4 right-1/5 opacity-12 animate-bounce" style={{ animationDelay: '3.8s' }}>
+        <Target className="w-5 h-5 text-rose-300" />
+      </div>
+      <div className="hidden lg:block absolute top-3/4 left-1/3 opacity-8 animate-bounce" style={{ animationDelay: '4.8s' }}>
+        <Award className="w-4 h-4 text-violet-300" />
+      </div>
+      <div className="hidden lg:block absolute top-1/6 right-2/5 opacity-10 animate-bounce" style={{ animationDelay: '5.2s' }}>
+        <Rocket className="w-4 h-4 text-orange-300" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8 min-h-screen flex flex-col">
         {/* Header - Knowledge + Voice = KNOVO */}
         <div className="text-center mb-8 md:mb-12 mt-8">
           <div className="space-y-4 md:space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight">
               <span className="inline-block">
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
                   Knowledge
@@ -168,13 +220,14 @@ export default function KnovoLandingPage() {
           {/* Container for Bot and Transcript - Equal Heights */}
           <div className="w-full flex flex-col lg:flex-row items-stretch justify-center gap-6">
 
-            {/* Knovo Bot Image - Fixed Height to Match Transcript */}
+            {/* Knovo Bot Image - Fixed Height to Match Transcript with Enhanced Purple Gradient */}
             <div className="flex-shrink-0">
               <div className="relative h-full">
                 <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-3xl p-6 border border-purple-500/20 shadow-2xl backdrop-blur-sm h-[400px] md:h-[500px] flex items-center justify-center">
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-indigo-600/10 rounded-3xl"></div>
                   <div className="relative z-10 w-60 h-60 sm:w-72 sm:h-72 md:w-[300px] md:h-[325px]">
-                    <div className="w-full h-full rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
+                    {/* Enhanced circular background with purple gradient */}
+                    <div className="w-full h-full rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden bg-gradient-to-br from-purple-600/20 via-indigo-600/15 to-purple-800/20 border-2 border-purple-500/30">
                       {/* Improved speaking animation - multiple concentric rings */}
                       {(running || isSpeaking) && (
                         <>
