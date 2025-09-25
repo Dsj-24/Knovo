@@ -20,16 +20,34 @@ const QuizPage = () => {
     if (showQuizForm) {
         return (
             <div>
-                <button
-                    onClick={() => setShowQuizForm(false)}
-                    className="mb-4 px-4 py-2 bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 rounded-2xl hover:bg-gray-600 transition-colors"
+<button
+    onClick={() => setShowQuizForm(false)}
+    className="mb-6 group relative overflow-hidden"
+>
+    <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 p-[2px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 px-8 py-4 rounded-2xl hover:bg-opacity-80 transition-all duration-300 group-hover:scale-[1.02]">
+            <div className="flex items-center gap-3">
+                <svg 
+                    className="w-6 h-6 text-white group-hover:text-pink-300 transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
                 >
-                    <h2 className='rounded-full text-white font-semibold'>
-                        ← Choose
-                    </h2>
-
-                </button>
-         <div className='flex flex-col items-center justify-center gap-8 p-4'>
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+                    />
+                </svg>
+                <h2 className="text-white font-bold text-lg bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-pink-200 group-hover:to-blue-200 transition-all duration-300">
+                    Choose Generation Method
+                </h2>
+            </div>
+        </div>
+    </div>
+</button>
+                <div className='flex flex-col items-center justify-center gap-8 p-4'>
                     <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 p-1 rounded-3xl shadow-2xl mb-4">
                         <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 px-20 py-6 rounded-3xl">
                             <h2 className='text-center text-2xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent'>
