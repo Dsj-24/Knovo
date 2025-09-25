@@ -1,4 +1,4 @@
-# 🚀 KNOVO — Knowledge + Voice = AI-powered Quiz Platform  
+# 🚀 KNOVO = Knowledge + Voice - AI-powered Quiz Platform  
 
 ![Knovo Logo](./public/demo.png)  
 
@@ -20,21 +20,20 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 ## 🎯 Key Features  
 
-- 🎤 **Voice-based Quizzing** – Speak your answers, get instant AI-powered responses.  
-- 📝 **Custom Quiz Generation** – Create quizzes via form-based input or voice prompts powered by Google Gemini API.
-- 📊 **Detailed Feedback** – Beyond accuracy: fluency, clarity, and comprehension are analyzed.
-- 👀 **Accessibility** – Voice-based workflows tailored for visually impaired learners.  
-- 👥 **Multiplayer & Leaderboards** – Each quiz has its own leaderboard with top scorers.  
+- 🎤 **Voice-based Quizzing** – Converse with Ai Quizmaster with a live transcript that shows the whole conversation.  
+- 📝 **Custom Quiz Generation** – Create quizzes via form-based input or voice prompts powered by Vapi Workflow and Google Gemini API.
+- 📊 **Detailed Feedback** – Beyond accuracy: fluency, clarity, and articulation are analyzed. Gives an answer key table for Mcq and True/False based questions.  
+- 👀 **Accessibility** – Voice-based workflows tailored for visually impaired learners and students of any age.  
+- 👥 **Multiplayer & Leaderboards** – Each quiz has its own leaderboard with top 3 high scorers.  
 - ⚡ **Challenge Modes** – Adaptive difficulty quizzes on specific topics or mixed sets, powered by **Vapi workflows**.  
 
 ---
 
 ## 👥 Stakeholders  
 
-- **Students & Learners** → Engage with fun, adaptive quizzes.  
+- **Students & Learners** → Engage learning with fun.  
 - **Educators & Institutions** → Gamify learning & track progress.  
 - **Visually Impaired Users** → Screen-free, accessible voice-first learning.  
-- **Communities & Peers** → Compete and improve together.  
 
 ---
 
@@ -42,8 +41,8 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 - **Frontend**: Next.js + TailwindCSS  
 - **Backend**: Node.js  
-- **AI/Voice**: Gemini API + Vapi SDK + Deepgram ASR + LLMs (OpenAI/Anthropic)  
-- **Database & Auth**: Firebase (Firestore + Auth)  
+- **AI/Voice**: Gemini API + Vapi SDK  
+- **Database & Auth**: Firebase (Firestore DB + Auth)  
 - **Hosting**: Vercel  
 - **Version Control**: GitHub  
 
@@ -51,25 +50,14 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 ## ⚙️ Architecture  
 
-![Architecture](./public/arch.jpg)  
+![Architecture](./public/arch.jpg)
 
-1. **User Authentication** → Secure sign-in via Firebase.  
-2. **Quiz Creation** → Quizzes generated dynamically from inputs (title, PDF, keywords) using Gemini API.  
-3. **Voice-based Quiz Attempt** → Conducted via Vapi SDK with Deepgram for speech recognition.  
-4. **Adaptive Engine** → Adjusts quiz difficulty after first 5 questions.  
-5. **Feedback Module** → AI evaluates knowledge + vocal clarity and stores results in Firestore.  
-6. **Leaderboard** → Real-time score tracking and display per quiz.  
-
----
-
-## 📌 How It Works  
-
-1. **Join & Select** a quiz/challenge.  
-2. **Generate Quiz** via form inputs (title/PDF) or voice prompts.  
-3. **Attempt Quiz** using voice — answers analyzed in real-time.  
-4. **Adaptive Difficulty** kicks in to match your level.  
-5. **Get Detailed Feedback** on accuracy, fluency, and clarity.  
-6. **Leaderboard Updates** instantly with scores.  
+1. **User Authentication** → Secure sign-in via Firebase Auth.  
+2. **Quiz Generation** → Quizzes created dynamically from inputs (title, PDF, or voice) using Gemini API. Stored in Firestore DB.  
+3. **Voice Interaction** → Users attempt quizzes through Vapi AI workflows (Deepgram ASR + 11labs transcription) with real-time analysis.  
+4. **Adaptive Challenges** → Difficulty automatically adjusts after the first 5 questions on random topics to match the user’s level in Challenge Mode.  
+5. **Feedback Page** → AI evaluates answers for accuracy, fluency, articulation, and clarity. Results are stored in Firestore DB.  
+6. **Leaderboard** → Real-time score tracking per quiz, displaying top scorers and updating instantly.  
 
 ---
 
@@ -91,10 +79,10 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 ## ✅ Evaluation Highlights  
 
-- **Working Prototype** – Fully functional voice quiz system.  
-- **Technical Depth** – Multimodal AI with adaptive workflows.  
-- **UX** – Engaging, gamified quiz with smooth UI.  
+- **Working Prototype** – Fully functional voice based quiz platform.  
+- **Technical Depth** – Multimodal AI :- Vapi workflows for voice based interaction and Gemini for dynamic quiz generation.  
+- **UX** – Engaging and interactive with smooth UI.  
 - **Accessibility** – Voice-based workflows for visually impaired users.  
-- **Docs & Presentation** – Architecture, assumptions, and demo video provided.  
+- **Docs & Presentation** – Architecture, assumptions, claims and demo video provided.  
 
 ---
