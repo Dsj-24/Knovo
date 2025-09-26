@@ -2,7 +2,7 @@
 
 ![Knovo Logo](./public/demo.png)  
 
-# 🏆 Built for the Prism GenAI Hackathon 2025 – Round 2  
+# 🏆 Built for the Prism GenAI Hackathon 2025 – Round 2
 
 🌐 **Live Deployment** → [Knovo App](https://knovo-dhlb.vercel.app)  
 ![Prism](./public/prism_logo.png)

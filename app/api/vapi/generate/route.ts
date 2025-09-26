@@ -155,7 +155,7 @@ IMPORTANT RULES:
         console.error("Error generating quiz:", error);
         return Response.json(
             { success: false, error: "Failed to generate quiz. Please check the model output or server logs." },
-            { status: 500, headers: corsHeaders }
+            { status: 404, headers: corsHeaders }
         );
     }
 }

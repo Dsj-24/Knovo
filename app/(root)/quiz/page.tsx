@@ -40,7 +40,7 @@ const QuizPage = () => {
                         d="M10 19l-7-7m0 0l7-7m-7 7h18" 
                     />
                 </svg>
-                <h2 className="text-white font-bold text-lg bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-pink-200 group-hover:to-blue-200 transition-all duration-300">
+                <h2 className="font-bold text-white text-lg bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text group-hover:from-purple-200 group-hover:via-pink-200 group-hover:to-blue-200 transition-all duration-300">
                     Choose Generation Method
                 </h2>
             </div>
