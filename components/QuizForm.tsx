@@ -133,7 +133,7 @@ const QuizForm = ({ userId }: QuizFormProps) => {
 
             setTimeout(() => {
                 router.push("/");
-            }, 1500);
+            }, 500);
 
         } catch (error: any) {
             toast.error(`Failed to generate quiz: ${error.message}`);
