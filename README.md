@@ -1,4 +1,4 @@
-# 🚀 KNOVO = Knowledge + Voice - AI-powered Quiz Platform  
+# 🚀 KNOVO = Knowledge + Voice - AI-powered Voice Based Quiz Platform  
 
 ![Knovo Logo](./public/demo.png)  
 
@@ -12,7 +12,7 @@
 ## 🌟 Overview  
 
 Knovo transforms traditional quizzing into an **immersive, voice-driven learning experience**.  
-Instead of static question banks, it dynamically generates quizzes from **titles, PDFs, or keywords** using **Gemini AI**. Learners attempt quizzes **through voice**, get **real-time adaptive feedback**, and track their performance via leaderboards.  
+Instead of static question banks, it dynamically generates quizzes from **form input (titles, PDFs)** , or **voice input (Vapi Workflow)** using **Gemini AI**. Learners attempt quizzes in **voice** mode  with a **Vapi Agent (A Quizmaster)** , get **real-time feedback**, and compete with others via **leaderboards**.  
 
 Our mission: **Make learning inclusive, engaging, and personalized** — for students, educators, and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
 
@@ -33,7 +33,7 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 - **Students & Learners** → Engage learning with fun.  
 - **Educators & Institutions** → Gamify learning & track progress.  
-- **Visually Impaired Users** → Screen-free, accessible voice-first learning.  
+- **Visually Impaired Users** → Accessible voice-first learning.  
 
 ---
 
@@ -63,7 +63,7 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 
 ## 🎥 Demo  
 
-- **Demo Video** → *(Add YouTube/Drive public link)*  
+- **Demo Video** → [Demo Video Drive Link](https://drive.google.com/file/d/1R6_TBxdgNVhlJ_yuLUonp0xZ7fI1BJAZ/view?usp=drivesdk)  
 - **Live App** → [Knovo on Vercel](https://knovo-dhlb.vercel.app)  
 
 ---
@@ -74,15 +74,6 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 - **College**: VIT Vellore  
 - **Theme**: Multimodal AI  
 - **Team Lead**: Divesh Singh  
-
----
-
-## ✅ Evaluation Highlights  
-
-- **Working Prototype** – Fully functional voice based quiz platform.  
-- **Technical Depth** – Multimodal AI :- Vapi workflows for voice based interaction and Gemini for dynamic quiz generation.  
-- **UX** – Engaging and interactive with smooth UI.  
-- **Accessibility** – Voice-based workflows for visually impaired users.  
-- **Docs & Presentation** – Architecture, assumptions, claims and demo video provided.  
+- **Document** → [Drive Link]
 
 ---
