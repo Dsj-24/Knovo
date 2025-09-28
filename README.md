@@ -1,13 +1,11 @@
-# 🚀 KNOVO = Knowledge + Voice - AI-powered Voice Based Quiz Platform  
+# KNOVO = Knowledge + Voice - AI-powered Voice Based Quiz Platform  
 
 ![Knovo Logo](./public/demo.png)  
 
-# 🏆 Built for the Prism GenAI Hackathon 2025 – Round 2
+# Built for the Samsung Prism GenAI Hackathon 2025
 
 🌐 **Live Deployment** → [Knovo App](https://knovo-dhlb.vercel.app)  
 ![Prism](./public/prism_logo.png)
-
----
 
 ## 🌟 Overview  
 
@@ -15,10 +13,6 @@ Knovo transforms traditional quizzing into an **immersive, voice-driven learning
 Instead of static question banks, it dynamically generates quizzes from **form input (titles, PDFs)** , or **voice input (Vapi Workflow)** using **Gemini AI**. Learners attempt quizzes in **voice** mode  with a **Vapi Agent (A Quizmaster)** , get **real-time feedback**, and compete with others via **leaderboards**.  
 
 Our **Mission** / **Purpose**: Make learning **inclusive, engaging, and personalized** — for **students, educators,** and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
-
----
-
----
 
 ## ⚙️ How to Set Up and Run the Project  
 
@@ -52,11 +46,11 @@ NEXT_PUBLIC_VAPI_MISCELLANEOUS_ID="Your Key"
 NEXT_PUBLIC_DEMO_WORKFLOW_ID="Your Key"
 ```
 
-### ⚠️ Important Notice
+### ⚠️ Important Notice (Setup Guide)
 
 - Please replace all environment variable values with **your own API keys** for services such as **Gemini** and **Vapi AI**.  
 - For **Firebase** and **Vapi workflows** (`NEXT_PUBLIC_VAPI_*`), except the Vapi web token, you will need to use the keys provided by us. This is because the workflows and Firestore database indexes have been created under our account.  
-- Alternatively, you may use our Special Setup guide mentioned in our Supplementary File or use **live deployment** to test the application without setting up your own environment:
+- Alternatively, you may use our **Special Setup guide** mentioned in our **Supplementary File** or use **live deployment** to test the application without setting up your own environment:
 
 👉 [Knovo on Vercel](https://knovo-dhlb.vercel.app)
 
@@ -68,7 +62,7 @@ npm run dev
 
 ---
 
-## 📂 Submission Details  
+## 📂 Submissions  
 
 - **Team Name**: The Immortals  
 - **College**: VIT Vellore  
