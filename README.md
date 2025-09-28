@@ -12,7 +12,11 @@
 Knovo transforms traditional quizzing into an **immersive, voice-driven learning experience**.  
 Instead of static question banks, it dynamically generates quizzes from **form input (titles, PDFs)** , or **voice input (Vapi Workflow)** using **Gemini AI**. Learners attempt quizzes in **voice** mode  with a **Vapi Agent (A Quizmaster)** , get **real-time feedback**, and compete with others via **leaderboards**.  
 
-Our **Mission** / **Purpose**: Make learning **inclusive, engaging, and personalized** — for **students, educators,** and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
+### Mission / Purpose
+
+Make learning **inclusive, engaging, and personalized** — for **students, educators,** and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
+
+---
 
 ## ⚙️ How to Set Up and Run the Project  
 
@@ -25,7 +29,7 @@ cd Knovo
 
 ### 2. Install all the dependencies
 
-This command will download all the required dependencies , to still know about the most important ones, refer to the **requirements.txt** file in the root folder.
+This command will download all the required dependencies , to still know about the most important ones, refer to the *requirements.txt* file in the root folder.
 
 ```bash
 npm install
@@ -50,7 +54,7 @@ NEXT_PUBLIC_DEMO_WORKFLOW_ID="Your Key"
 
 - Please replace all environment variable values with **your own API keys** for services such as **Gemini** and **Vapi AI**.  
 - For **Firebase** and **Vapi workflows** (`NEXT_PUBLIC_VAPI_*`), except the Vapi web token, you will need to use the keys provided by us. This is because the workflows and Firestore database indexes have been created under our account.  
-- Alternatively, you may use our **Special Setup guide** mentioned in our **Supplementary File** or use **live deployment** to test the application without setting up your own environment:
+- Alternatively, you may use our *Special Setup guide* mentioned in our *Supplementary File* or use *live deployment* to test the application without setting up your own environment:
 
 👉 [Knovo on Vercel](https://knovo-dhlb.vercel.app)
 
@@ -70,6 +74,6 @@ npm run dev
 - **Team Lead**: Divesh Singh  
 - **Demo Video** → [Demo Video Drive Link](https://drive.google.com/file/d/1R6_TBxdgNVhlJ_yuLUonp0xZ7fI1BJAZ/view?usp=drivesdk)
 - **Live App** → [Knovo on Vercel](https://knovo-dhlb.vercel.app)  
-- **Supplementary File**: The_Immortals.pdf (inside root folder)
+- **Supplementary File**: TheImmortals_VIT_1_Divesh.pdf (inside root folder)
 
 ---
