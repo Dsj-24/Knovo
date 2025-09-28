@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getBestFeedbackByUserId } from '@/lib/actions/general.action';
 
-// --- Loading Components (unchanged) ---
 const LoadingSpinner = () => (
   <div className="relative flex items-center justify-center">
     <div className="animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-blue-600"></div>
@@ -62,7 +61,6 @@ const QuizCard = ({ id, viewerId, userId, topic, type, createdAt }: QuizCardProp
   const formattedDate = dayjs(createdAt || Date.now()).format("MMM D, YYYY");
   const [isLoading, setIsLoading] = useState(false);
 
-  // --- NEW: type-based colors (matches leaderboard) ---
   const palette = (() => {
     const t = (type || '').toLowerCase();
     if (t.includes('multiple')) {
@@ -81,7 +79,7 @@ const QuizCard = ({ id, viewerId, userId, topic, type, createdAt }: QuizCardProp
         stat: 'text-emerald-100',
       };
     }
-    // verbal (default)
+
     return {
       wrap: 'from-orange-500 via-red-500 to-pink-600',
       chip: 'bg-gradient-to-r from-orange-500 to-red-500 text-white',
@@ -135,8 +133,8 @@ const QuizCard = ({ id, viewerId, userId, topic, type, createdAt }: QuizCardProp
               </div>
 
               <div className="flex flex-row justify-between pt-10">
-                <Button className="btn-primary text-lg p-6" onClick={() => setIsLoading(true)}>
-                  <Link href={feedback ? `/quiz/${id}/feedback` : `/quiz/${id}`}>
+                <Button asChild className="btn-primary text-lg p-6" >
+                  <Link onClick={() => setIsLoading(true)} href={feedback ? `/quiz/${id}/feedback` : `/quiz/${id}`}>
                     {feedback ? "Check Feedback" : "Take Quiz"}
                   </Link>
                 </Button>

@@ -14,57 +14,57 @@
 Knovo transforms traditional quizzing into an **immersive, voice-driven learning experience**.  
 Instead of static question banks, it dynamically generates quizzes from **form input (titles, PDFs)** , or **voice input (Vapi Workflow)** using **Gemini AI**. Learners attempt quizzes in **voice** mode  with a **Vapi Agent (A Quizmaster)** , get **real-time feedback**, and compete with others via **leaderboards**.  
 
-Our mission: **Make learning inclusive, engaging, and personalized** — for students, educators, and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
+Our **Mission** / **Purpose**: Make learning **inclusive, engaging, and personalized** — for **students, educators,** and especially the **visually impaired** who benefit from a screen-free, hands-free quiz experience.  
 
 ---
 
-## 🎯 Key Features  
-
-- 🎤 **Voice-based Quizzing** – Converse with Ai Quizmaster with a live transcript that shows the whole conversation.  
-- 📝 **Custom Quiz Generation** – Create quizzes via form-based input or voice prompts powered by Vapi Workflow and Google Gemini API.
-- 📊 **Detailed Feedback** – Beyond accuracy: fluency, clarity, and articulation are analyzed. Gives an answer key table for Mcq and True/False based questions.  
-- 👀 **Accessibility** – Voice-based workflows tailored for visually impaired learners and students of any age.  
-- 👥 **Multiplayer & Leaderboards** – Each quiz has its own leaderboard with top 3 high scorers.  
-- ⚡ **Challenge Modes** – Adaptive difficulty quizzes on specific topics or mixed sets, powered by **Vapi workflows**.  
-
 ---
 
-## 👥 Stakeholders  
+## ⚙️ How to Set Up and Run the Project  
 
-- **Students & Learners** → Engage learning with fun.  
-- **Educators & Institutions** → Gamify learning & track progress.  
-- **Visually Impaired Users** → Accessible voice-first learning.  
+### 1. Clone the repository
 
----
+```bash
+git clone https://github.com/Dsj-24/Knovo.git
+cd Knovo
+```
 
-## 🛠️ Tech Stack  
+### 2. Install all the dependencies
 
-- **Frontend**: Next.js + TailwindCSS  
-- **Backend**: Node.js  
-- **AI/Voice**: Gemini API + Vapi SDK  
-- **Database & Auth**: Firebase (Firestore DB + Auth)  
-- **Hosting**: Vercel  
-- **Version Control**: GitHub  
+This command will download all the required dependencies , to still know about the most important ones, refer to the **requirements.txt** file in the root folder.
 
----
+```bash
+npm install
+```
 
-## ⚙️ Architecture  
+### 3. Configure Environment Variables
 
-![Architecture](./public/arch.jpg)
+In the root folder , create **.envlocal** file and add the following:-
 
-1. **User Authentication** → Secure sign-in via Firebase Auth.  
-2. **Quiz Generation** → Quizzes created dynamically from inputs (title, PDF, or voice) using Gemini API. Stored in Firestore DB.  
-3. **Voice Interaction** → Users attempt quizzes through Vapi AI workflows (Deepgram ASR + 11labs transcription) with real-time analysis.  
-4. **Adaptive Challenges** → Difficulty automatically adjusts after the first 5 questions on random topics to match the user’s level in Challenge Mode.  
-5. **Feedback Page** → AI evaluates answers for accuracy, fluency, articulation, and clarity. Results are stored in Firestore DB.  
-6. **Leaderboard** → Real-time score tracking per quiz, displaying top scorers and updating instantly.  
+```env
+FIREBASE_PROJECT_ID="Your Key"
+FIREBASE_PRIVATE_KEY="Your Key"
+FIREBASE_CLIENT_EMAIL="Your Key"
+GOOGLE_GENERATIVE_AI_API_KEY="Your Key"
+NEXT_PUBLIC_VAPI_WEB_TOKEN="Your Key"
+NEXT_PUBLIC_VAPI_WORKFLOW_ID="Your Key"
+NEXT_PUBLIC_VAPI_MISCELLANEOUS_ID="Your Key"
+NEXT_PUBLIC_DEMO_WORKFLOW_ID="Your Key"
+```
 
----
+### ⚠️ Important Notice
 
-## 🎥 Demo  
+- Please replace all environment variable values with **your own API keys** for services such as **Gemini** and **Vapi AI**.  
+- For **Firebase** and **Vapi workflows** (`NEXT_PUBLIC_VAPI_*`), except the Vapi web token, you will need to use the keys provided by us. This is because the workflows and Firestore database indexes have been created under our account.  
+- Alternatively, you may use our Special Setup guide mentioned in our Supplementary File or use **live deployment** to test the application without setting up your own environment:
 
-- **Demo Video** → [Demo Video Drive Link](https://drive.google.com/file/d/1R6_TBxdgNVhlJ_yuLUonp0xZ7fI1BJAZ/view?usp=drivesdk)  
-- **Live App** → [Knovo on Vercel](https://knovo-dhlb.vercel.app)  
+👉 [Knovo on Vercel](https://knovo-dhlb.vercel.app)
+
+### 4. Run the application
+
+```bash
+npm run dev
+```
 
 ---
 
@@ -74,6 +74,8 @@ Our mission: **Make learning inclusive, engaging, and personalized** — for stu
 - **College**: VIT Vellore  
 - **Theme**: Multimodal AI  
 - **Team Lead**: Divesh Singh  
-- **Document** → [Drive Link]
+- **Demo Video** → [Demo Video Drive Link](https://drive.google.com/file/d/1R6_TBxdgNVhlJ_yuLUonp0xZ7fI1BJAZ/view?usp=drivesdk)
+- **Live App** → [Knovo on Vercel](https://knovo-dhlb.vercel.app)  
+- **Supplementary File**: The_Immortals.pdf (inside root folder)
 
 ---

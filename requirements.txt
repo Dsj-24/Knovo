@@ -1,0 +1,12 @@
+This project is built using Node.js and Next.js.
+All dependencies are managed in the package.json file.
+Below are the core dependencies related to AI and Firebase services for quick reference.
+--- Firebase Services ---
+firebase==12.0.0            # Firebase SDK for client-side authentication and database access.
+firebase-admin==13.4.0      # Firebase Admin SDK for backend/server-side operations.
+firebase-functions==6.4.0   # SDK for creating and managing Firebase Cloud Functions.
+
+--- AI and Voice Services ---
+@ai-sdk/google==1.2.22      # Vercel AI SDK adapter for Google AI (Gemini).
+ai==4.3.19                  # The primary Vercel AI SDK for streaming UI components.
+@vapi-ai/web==2.3.8         # Vapi AI SDK for implementing voice-based interactions.
